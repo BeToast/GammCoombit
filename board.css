@@ -1,16 +1,38 @@
+body{
+	background-color: grey;
+}
 #chessBoard span{
     display: inline-block;
-    width: 128px;
-    height: 128px;
-	border:1px solid black;
-	
+	position: relative;
+	left: 222px;
+    width: 200px;
+    height: 200px;
+	border:2px solid black;
 }
-
 #chessBoard div:nth-child(odd) span:nth-child(even),
 #chessBoard div:nth-child(even) span:nth-child(odd){
-    background-color: black;
+    background-color: orange;
 }
 #chessBoard div:nth-child(even) span:nth-child(even),
 #chessBoard div:nth-child(odd) span:nth-child(odd){
-    background-color: white;
+    background-color:purple;
+}
+.card-title
+{
+	color: orange;
+	text-align: center;
+}
+.card-text
+{
+	font-size: 14px;
+	color: yellow;
+}
+.figure-caption
+{
+	color: yellow;
+}
+.btn
+{
+	background-color: yellow;
+	color: blue;
 }

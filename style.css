@@ -1,0 +1,10 @@
+/*
+    Just a basic css file. 
+    Put shit here that doesnt have its own css file already
+
+    Please dont put board styling into here as board has its own css file
+*/
+.body{
+    background-color: #516091;
+    border: 0;
+}

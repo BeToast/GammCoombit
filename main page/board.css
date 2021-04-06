@@ -5,9 +5,9 @@ body{
     display: inline-block;
 	position: relative;
 	left: 222px;
-    width: 200px;
+    width: 200px; 
     height: 200px;
-	border:2px solid black;
+	outline:4px solid black;
 }
 #chessBoard div:nth-child(odd) span:nth-child(even),
 #chessBoard div:nth-child(even) span:nth-child(odd){

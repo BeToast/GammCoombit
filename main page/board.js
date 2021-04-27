@@ -21,3 +21,10 @@ function generateId (i, j) {
             return(id = ("d"+i+""));
     }
 }
+function settings() {
+  document.getElementById("nav-link1").style.display = "active";
+}
+
+function off() {
+  document.getElementById("chessBoard").style.display = "none";
+}

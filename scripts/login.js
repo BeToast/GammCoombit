@@ -7,13 +7,11 @@ function login()
             // Signed in
             var user = userCredential.user;
             // If successful redirect to a secure page
-            window.location.href = "Board.html"
+            window.location.href = "index.html"
             console.log(user);
             // ...
         })
         .catch((error) => {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            console.log(errorCode, errorMessage);
+            alert(error.message);
         });
 }

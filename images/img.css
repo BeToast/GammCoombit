@@ -1,0 +1,34 @@
+.wR,.bR,.wK,.bK,.wB,.bB
+{
+    width: 100%;
+}
+
+.wR
+{
+    background-image: url("wR.png");
+}
+
+.bR
+{
+    background-image: url("bR.png");
+}
+
+.wK
+{
+    background-image: url("wK.png");
+}
+
+.bK
+{
+    background-image: url("bK.png");
+}
+
+.wB
+{
+    background-image: url("wB.png");
+}
+
+.bB
+{
+    background-image: url("bB.png");
+}

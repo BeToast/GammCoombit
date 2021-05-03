@@ -1,6 +1,9 @@
 .wR,.bR,.wK,.bK,.wB,.bB
 {
+    background-repeat: no-repeat;
+    background-position: center; 
     width: 100%;
+    height: 100%;
 }
 
 .wR

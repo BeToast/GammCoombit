@@ -1,36 +1,64 @@
-//create 2d array to be the boardState
-var defaultBoard = new Array(4);
-for(var i = 0; i < 4; i++){
-    defaultBoard[i] = new Array(4);
-}
-defaultBoard[0][0] = "0";
-defaultBoard[0][1] = "0";
-defaultBoard[0][2] = "bR";
-defaultBoard[0][3] = "bK";
-defaultBoard[1][0] = "0";
-defaultBoard[1][1] = "0";
-defaultBoard[1][2] = "bB";
-defaultBoard[1][3] = "bR";
-defaultBoard[2][0] = "wR";
-defaultBoard[2][1] = "wB";
-defaultBoard[2][2] = "0";
-defaultBoard[2][3] = "0";
-defaultBoard[3][0] = "wK";
-defaultBoard[3][1] = "wR";
-defaultBoard[3][2] = "0";
-defaultBoard[3][3] = "0";
+//window.onload = function(){
+  //create 2d array to be the boardState
+  var defaultBoard = new Array(4);
+  for(var i = 0; i < 4; i++){
+      defaultBoard[i] = new Array(4);
+  }
+  defaultBoard[0][0] = "O";
+  defaultBoard[0][1] = "O";
+  defaultBoard[0][2] = "bR";
+  defaultBoard[0][3] = "bK";
+  defaultBoard[1][0] = "O";
+  defaultBoard[1][1] = "O";
+  defaultBoard[1][2] = "bB";
+  defaultBoard[1][3] = "bR";
+  defaultBoard[2][0] = "wR";
+  defaultBoard[2][1] = "wB";
+  defaultBoard[2][2] = "O";
+  defaultBoard[2][3] = "O";
+  defaultBoard[3][0] = "wK";
+  defaultBoard[3][1] = "wR";
+  defaultBoard[3][2] = "O";
+  defaultBoard[3][3] = "O";
 
-
-var chessBoard = document.getElementById("chessBoard");
-for (var i=3; i>=0; i--){
+  var chessBoard = document.getElementById("chessBoard");
+  for (var i=3; i>=0; i--){
     var row = chessBoard.appendChild(document.createElement("div"));
     for (var j=0; j<=3; j++){
-        square = document.createElement("span");
-        square.id = generateId(i, j);
-        square.title = defaultBoard[i][j];
-        row.appendChild(square);
+      square = document.createElement("span");
+      square.id = generateId(i, j);
+      var tempClass = defaultBoard[i][j];
+      square.className = tempClass;
+      square.setAttribute("ondrop","drop_handler(event)");
+      square.setAttribute("ondragover","dragover_handler(event)");
+      if(tempClass==="wR"||tempClass==="bR"||tempClass==="wK"||tempClass==="bK"||tempClass==="wB"||tempClass==="bB"){
+        square.setAttribute("draggable", "true");
+        square.setAttribute("onDragStart", "dragstart_handler(event)");
+      }else{
+        square.className = "O";
+      }
+      row.appendChild(square);
     }
-}
+  }
+  function dragstart_handler(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+  }
+  
+  function drop_handler(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    var prev = document.getElementById(data);
+    ev.target.className = prev.className;
+    ev.target.setAttribute("draggable","true");
+    ev.target.setAttribute("onDragStart", "dragstart_handler(event)");
+    prev.className = "O";
+    prev.removeAttribute("draggable");
+    prev.removeAttribute("onDragStart");
+  }
+
+  function dragover_handler(ev) {
+    ev.preventDefault();
+  }
 
 function generateId (i, j) {
     var id = "";
@@ -51,24 +79,6 @@ function settings() {
 
 function off() {
     document.getElementById("chessBoard").style.display = "none";
-}
-
-function newBoard(newBoard){
-    var board = document.getElementById("chessBoard");
-    for(let e of board.getElementByTagName("span")){
-        if(e.title!="0"){
-            e.appendChild(newPiece(e.title));
-        }
-    }
-}
-
-function newPiece(piece){
-    var img = e.createElement("img");
-    img.setAttribute("class", ""+piece+"");
-    img.setAttribute("draggable", "true");
-    img.setAttribute("onDrag", getCoord());
-    img.setAttribute("onDrop", movePiece());
-    return img;
 }
 
 // We enclose this in window.onload.

@@ -1,0 +1,37 @@
+.wR,.bR,.wK,.bK,.wB,.bB
+{
+    background-repeat: no-repeat;
+    background-position: center; 
+    width: 100%;
+    height: 100%;
+}
+
+.wR
+{
+    background-image: url("../img/wR.png");
+}
+
+.bR
+{
+    background-image: url("../img/bR.png");
+}
+
+.wK
+{
+    background-image: url("../img/wK.png");
+}
+
+.bK
+{
+    background-image: url("../img/bK.png");
+}
+
+.wB
+{
+    background-image: url("../img/wB.png");
+}
+
+.bB
+{
+    background-image: url("../img/bB.png");
+}

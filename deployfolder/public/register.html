@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>The Gamm Cumbit</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="css/login.css"/>
+	<script src="js/register.js"></script>
+  </head>
+  <body>
+    
+		<section class="form my-4 mx-5">
+			<div class="container">
+				<div class="row no-gutters">
+					<div class="col-md-5">
+						<img src="img/ted.jpg" class="img-fluid">
+					</div>
+					<div class="col-lg-7 py-5 px-5">
+						<h2 class="font-weight-bold py-3">Gamm Cumbit</h2>
+						<h4>Create an account</h4>
+						<form>
+							<div class="form-row">
+								<div class="col-lg-7">
+									<input type="name" id="nicknameField" placeholder="Nick Name" class="form-control my-3 p-4">
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="col-lg-7">
+									<input type="email" id="emailField" placeholder="Email-Address" class="form-control my-3 p-4">
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="col-lg-7">
+									<input type="password" id="passwordField" placeholder="*******" class="form-control my-3 p-4">
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="col-lg-7">
+									<button type="button" onclick="register()" class="btn1">Register</button>
+								</div>
+							</div>
+							<p>Already have an account? <a href="login.html">Login Here</a></p>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+<!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+<script src="/__/firebase/8.3.0/firebase-app.js"></script>
+<!-- Add Firebase products that you want to use -->
+<script src="/__/firebase/8.3.0/firebase-auth.js"></script>
+<script src="/__/firebase/8.3.0/firebase-firestore.js"></script>
+<!-- Initialize Firebase -->
+<script src="/__/firebase/init.js"></script>
+</body>
+</html>

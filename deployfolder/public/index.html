@@ -1,22 +1,18 @@
 <html>
 <head>
 	<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'/>
-	<link rel="stylesheet" href="board.css">
-	
-	<script src="javascripts/getcomments.js"></script>
-	<script src="javascripts/postcomments.js"></script>
+	<link rel="stylesheet" href="css/board.css">
+	<link rel="stylesheet" href="css/piece.css">
 </head>
 <body>
 			
 			
-<div style="background-image: url('image.jpg');">
+<div style="background-image: url('img/epicbg.jpg');">
 	<div class="row">
 		<h1 class ="card-title bg-dark text-center mb-2">The Gamm Cumbit</h1>
 	</div>
 	<div class="row">
-		<div class="p-2">
-			<div id="chessBoard">
-			</div>
+		<div id="chessBoard">
 		</div>
 	 <div class = "chat">
         <div class = "chat-window" id = "chat-window">
@@ -53,8 +49,18 @@
 
 <!-- Initialize Firebase -->
 <script src="//firebase/init.js"></script>
-<script src="javascripts/board.js"></script>
 <script src="bootstrap.js"></script>
+<script src="js/board.js"></script>
+<script src="js/getcomments.js"></script>
+<script src="js/postcomments.js"></script>
+<script src="js/checkUser.js"></script>
+<script>
+	document.addEventListener("DOMContentLoaded", function(){
+        checkUser();
+        getSecureApi();
+    });
+</script>
+
 </body>
 
 </html>

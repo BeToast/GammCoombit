@@ -1,4 +1,4 @@
-window.onload = function() {
+
   var firebaseConfig = {
     apiKey: "AIzaSyAgH3rk-JsYHUGzNBBOLxdrVEW5ZO2KCO8",
     authDomain: "ourgame-c7b54.firebaseapp.com",
@@ -53,4 +53,4 @@ window.onload = function() {
 
   }
   document.addEventListener('DOMContentLoaded',init);
-}
+

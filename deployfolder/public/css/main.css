@@ -19,19 +19,15 @@ html {
   }
   #chessBoard div:nth-child(odd) span:nth-child(even),
   #chessBoard div:nth-child(even) span:nth-child(odd){
-    background-color: orange;
+    background-color: white;
   }
   #chessBoard div:nth-child(even) span:nth-child(even),
   #chessBoard div:nth-child(odd) span:nth-child(odd){
-    background-color:white;
+    background-color:orange;
   }
-  #chessBoard div:nth-child(1) span:nth-child(1),
-  #chessBoard div:nth-child(1) span:nth-child(1){
-    background-color: red ;
-  }
-  #chessBoard div:nth-child(4) span:nth-child(4),
-  #chessBoard div:nth-child(4) span:nth-child(4){
-    background-color:red;
+  #chessBoard div:nth-child(1) span:nth-child(4),
+  #chessBoard div:nth-child(4) span:nth-child(1){
+    background-color:gray;
   }
   .nav-item
   {

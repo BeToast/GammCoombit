@@ -1,4 +1,12 @@
 function getSecureApi(){
+	firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            // User is signed in.
+            console.log(firebase.auth().currentUser);
+        } else {
+            // No user is signed in.
+        }
+    });
     var xhr = new XMLHttpRequest();
     xhr.open('GET', 'https://us-central1-ourgame-c7b54.cloudfunctions.net/authorizedendpoint');
 
@@ -7,8 +15,8 @@ function getSecureApi(){
         var DONE = 4; // readyState 4 means the request is done.
         var OK = 200; // status 200 is a successful return.
         if (xhr.readyState === DONE) {
-            if (xhr.status === OK) {
-    
+            if (xhr.status === OK|| xhr.status = 304) {
+				console.log('Token successful');
             }
         } else {
             console.log('Error: ' + xhr.status); // An error occurred during the request.

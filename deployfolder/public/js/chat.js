@@ -10,6 +10,14 @@
   });
   let email = "";
   let name = "";
+  firebase.auth().onAuthStateChanged(function(user) {
+		if (user) {	
+			email = user.email;
+			name = user.displayName;
+		} else {
+			
+		}
+	});
   const msgScreen = document.getElementById("messages");
   const msgForm = document.getElementById("messageForm");
   const msgInput = document.getElementById("msg-input");

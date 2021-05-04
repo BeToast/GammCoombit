@@ -1,111 +1,111 @@
 html {
     height: 100%;
-	width: 100%;
-	
-}
-body{
-	overflow-x: hidden;
-}
-#chessBoard span{
-
+    width: 100%;
+  
+  }
+  body{
+  overflow-x: hidden;
+  }
+  #chessBoard span{
+  
     display: inline-block;
-	position: relative;
-	top:15px;
-
-	left: 5vw;
-    width: 20vh; 
+  position: relative;
+  top:15px;
+  left: 5vw;
+    width: 10vw; 
     height: 20vh;
-	outline:4px solid black;
-}
-#chessBoard div:nth-child(odd) span:nth-child(even),
-#chessBoard div:nth-child(even) span:nth-child(odd){
+  outline:4px solid black;
+    padding-bottom: 10vw;
+  }
+  #chessBoard div:nth-child(odd) span:nth-child(even),
+  #chessBoard div:nth-child(even) span:nth-child(odd){
     background-color: orange;
-}
-#chessBoard div:nth-child(even) span:nth-child(even),
-#chessBoard div:nth-child(odd) span:nth-child(odd){
+  }
+  #chessBoard div:nth-child(even) span:nth-child(even),
+  #chessBoard div:nth-child(odd) span:nth-child(odd){
     background-color:white;
-}
-.nav-item
-{
-	color: orange;
-}
-.page-footer
-{
-	top:18px;
-	position:relative;
-	width:100%;
-	
-} 
-.card-title
-{
-	position: relative;
-	width:100%;
-	color: orange;
-	text-align: center;
-	
-}
-#chat{
+  }
+  .nav-item
+  {
+  color: orange;
+  }
+  .page-footer
+  {
+  top:34px;
+  position:relative;
+  width:100%;
+  
+  } 
+  .card-title
+  {
+  position: relative;
+  width:100%;
+  color: orange;
+  text-align: center;
+  
+  }
+  #chat{
     position: relative;
     top: 110px;
-}
-#settings{
+  }
+  #settings{
     position: relative;
     top: 110px;
     right: 150px;
-}
-#log-out{
+  }
+  #log-out{
     position: relative;
     top: 110px;
     right: 50px;
-}
-
-#user-name{
+  }
+  
+  #user-name{
     position: relative;
     top:60px;
     right: 50px;
-}
-
-/*Chat box styling */
-.chat{
-	padding-top: 2vh;
-	left: 5vw;
-	top: 1vh;
+  }
+  
+  /*Chat box styling */
+  .chat{
+  padding-top: 2vh;
+  left: 5vw;
+  top: 1vh;
     height: 80vh;
     position: relative;
     margin: auto;
-	box-sizing: border-box;
-
-}  
-
-.chat-window{
-    height: 78vh;
-	width: 78vh;
+  box-sizing: border-box;
+  
+  }  
+  
+  .chat-window{
+    height: 72vh;
+    width: 43vw;
     overflow-y: scroll;
     background-color: white;
     border-radius: 10px;
     -webkit-box-shadow: 22px 24px 18px -10px rgba(0,0,0,0.35);
     -moz-box-shadow: 22px 24px 18px -10px rgba(0,0,0,0.35);
     box-shadow: 22px 24px 18px -10px rgba(0,0,0,0.35);
-}
-
-#messageForm{
+  }
+  
+  #messageForm{
     background-color: orange;
     position: absolute;
-    bottom: 0;
+    bottom: -23px;
     padding: 10px;
     width: 100%;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-}
-
-#comment{
+  }
+  
+  #comment{
     padding: 10px;
     border-radius: 20px;
     width: 80%;
     margin-left: 2%;
-}
-
-#msg-btn{
+  }
+  
+  #msg-btn{
     width: 9%;
     padding: 9px;
     border-radius: 20px;
@@ -116,17 +116,17 @@ body{
     font-weight: bold;
     border: none;
     margin-left: 1%;
-}
-
-#msg-btn:hover{
+  }
+  
+  #msg-btn:hover{
     background-color: rgb(5, 153, 116);
-}
-
-.msg{
+  }
+  
+  .msg{
     list-style-type: none;
-}
-
-.msg-span{
+  }
+  
+  .msg-span{
     display: inline-block;
     padding:10px;
     border-radius: 20px;
@@ -135,60 +135,49 @@ body{
     color: black;
     margin: 15px 5px 0px 0px;
     text-align: left;
-}
-.name{
+  }
+  .name{
     font-weight: bold;
-}
-
-.my{
+  }
+  
+  .my{
     text-align: right;
-}
-
-.my span{
+  }
+  
+  .my span{
     color: white;
     background-color: rgb(221, 170, 122);
     margin-right: 20px;
-}
-
-.my i{
+  }
+  
+  .my i{
     display:none;
-}
-
-/*Scroll styling */
-
-/* width */
-#chat-window::-webkit-scrollbar {
+  }
+  
+  /*Scroll styling */
+  
+  /* width */
+  #chat-window::-webkit-scrollbar {
     width: 20px;
     height: 50%;
-}
+  }
   
-/* Track */
-#chat-window::-webkit-scrollbar-track {
+  /* Track */
+  #chat-window::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px grey; 
     border-radius: 20px;
-}
-
-/* Handle */
-#chat-window::-webkit-scrollbar-thumb {
+  }
+  
+  /* Handle */
+  #chat-window::-webkit-scrollbar-thumb {
     box-shadow: inset 0 0 5px grey; 
     background:rgb(82, 196, 133);
     border-radius: 20px;
-}
-
-/* Handle on hover */
-#chat-window::-webkit-scrollbar-thumb:hover {
+  }
+  
+  /* Handle on hover */
+  #chat-window::-webkit-scrollbar-thumb:hover {
     background:rgb(5, 190, 144); 
-}
-
-.logo{
-    width: 160px;
-    height: 160px;
-}
-
-.center-logo{
-    width: 160px;
-    height: 160px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
+  }
+  
+  

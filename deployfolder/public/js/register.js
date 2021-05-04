@@ -4,7 +4,7 @@ function register()
     let password = document.getElementById('passwordField').value
     firebase.auth().createUserWithEmailAndPassword(email, password)
 	.then(function(result) {
-		window.location.href = "LoginPage.html"
+		window.location.href = "login.html"
         return result.user.updateProfile({
 			displayName: document.getElementById("nicknameField").value
         })

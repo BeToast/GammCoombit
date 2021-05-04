@@ -35,7 +35,7 @@ html {
   }
   .page-footer
   {
-  top:34px;
+  top:10px;
   position:relative;
   width:100%;
   
@@ -82,7 +82,7 @@ html {
   }  
   
   .chat-window{
-    height: 72vh;
+    height: 74vh;
     width: 43vw;
     overflow-y: scroll;
     background-color: white;
@@ -183,5 +183,4 @@ html {
   #chat-window::-webkit-scrollbar-thumb:hover {
     background:rgb(5, 190, 144); 
   }
-  
-  
+ 

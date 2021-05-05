@@ -12,6 +12,7 @@ function getSecureApi(){
 
 // Track the state changes of the request.
     xhr.onreadystatechange = function () {
+	setTimeout(function(){
         var DONE = 4; // readyState 4 means the request is done.
         var OK = 200; // status 200 is a successful return.
         if (xhr.readyState === DONE) {
@@ -20,12 +21,13 @@ function getSecureApi(){
             }
         } else {
             console.log('Error: ' + xhr.status); // An error occurred during the request.
-			//window.location.href = "login.html"
+			window.location.href = "login.html"
         }
     };
     // Set the Authorization header
     xhr.setRequestHeader('Authorization', 'Bearer ' + getCookie('accessToken'))
     xhr.send(null);
+	}, 3000);
 }
 
 // W3C Schools

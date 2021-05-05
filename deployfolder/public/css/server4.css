@@ -5,7 +5,7 @@ html {
 }
 body{
 overflow-x: hidden;
-background-color: #5483cb;
+background-color: #0a2830;;
 
 }
 
@@ -17,7 +17,7 @@ background-color: #5483cb;
   left: 5vw;
   width: 10vw; 
   height: 20vh;
-  outline:4px solid black;
+  outline:4px solid #0a2830;
   padding-bottom: 10vw;
   border-radius: 5px;
   /*border-bottom-left-radius: 50px;
@@ -25,15 +25,15 @@ background-color: #5483cb;
 }
 #chessBoard div:nth-child(odd) span:nth-child(even),
 #chessBoard div:nth-child(even) span:nth-child(odd){
-  background-color: #b4c1ee;
+  background-color:  #019b9b;
 }
 #chessBoard div:nth-child(even) span:nth-child(even),
 #chessBoard div:nth-child(odd) span:nth-child(odd){
-  background-color:#ef8263;
+  background-color:#bee871;
 }
 #chessBoard div:nth-child(1) span:nth-child(4),
 #chessBoard div:nth-child(4) span:nth-child(1){
-  background-color:rgb(255, 235, 227);
+  background-color:white;
 }
 .nav-item
 {
@@ -49,19 +49,15 @@ color: rgb(255, 255, 255);;
 } 
 .card-title
 {
-display: inline-block;
   padding:10px;
   border-radius: 20px;
-  font-size: xx-large;
-  background-color: #5483cb;
-  color: #f8f1de;
-  margin: 15px 5px 0px 0px;
+  font-size: xxxx-large;
+  color: #0a2830;
   left: -2vw;
   top: 1vh;
   height: -100vh;
   position: relative;
   margin: auto;
-  box-sizing: border-box;
 }
 
 .quit{
@@ -69,7 +65,7 @@ display: inline-block;
   padding:10px;
   border-radius: 20px;
   font-size: x-large;
-  background-color: #5483cb;
+  background-color: #0a2830;
   color: #f8f1de;
   margin: 15px 5px 0px 0px;
   left: -2vw;
@@ -146,13 +142,12 @@ a:active {
 }
 
 #messageForm{
-  background-color: #5483cb;
+  background-color: #0a2830;
   position: absolute;
   bottom: -65px;
   padding: 10px;
   width: 100%;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-radius: 10px;
 }
 #msg-input{
   padding: 10px;
@@ -173,8 +168,7 @@ a:active {
   margin-left: 1%;
 }
 #msg-btn:hover{
-  background-color:#ef8263;
-  ;
+  background-color: #dc9db5;
 }
 
 .msg{
@@ -186,8 +180,8 @@ a:active {
   padding:10px;
   border-radius: 20px;
   font-size: large;
-  background-color: ef8263;
-  color: rgb(255, 235, 227);
+  background-color: #dc9db5;
+  color: #05141a;
   margin: 15px 5px 0px 0px;
   text-align: left;
 }
@@ -200,8 +194,8 @@ a:active {
 }
 
 .my span{
-  color: rgb(255, 235, 227);
-  background-color: #5483cb;
+  color: #05141a;
+  background-color: #bee871;
   margin-right: 20px;
 }
 
@@ -233,7 +227,7 @@ a:active {
 
 /* Handle on hover */
 #chat-window::-webkit-scrollbar-thumb:hover {
-  background:rgb(236, 8, 42); 
+  background:#dc9db5; 
 }
 #logout-button{
   width: 9%;

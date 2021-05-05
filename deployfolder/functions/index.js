@@ -29,6 +29,7 @@ exports.authorizedendpoint = functions.https.onRequest((request, response) => {
         try {
             const decodedIdToken = admin.auth().verifyIdToken(idToken).then((token) => {
                 console.log('ID Token correctly decoded', token);
+				response.send("Welcome to the secure section " + token);
 
             });
         } catch (error) {

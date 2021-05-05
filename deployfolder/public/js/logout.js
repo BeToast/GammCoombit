@@ -1,8 +1,8 @@
 
-const msgBtn = document.getElementById("logout-button");
-function init() {
-	msgBtn.addEventListener("click", logout);
-}
+//const msgBtn = document.getElementById("logout-button");
+//function init() {
+//	msgBtn.addEventListener("click", logout);
+//}
 function logout() {
 	firebase.auth().signOut().then(() => {
 			// Sign-out successful.

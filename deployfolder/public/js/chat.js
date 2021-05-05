@@ -31,9 +31,9 @@
       msgRef.on('child_added', updateMsgs);
   }
   const updateMsgs = data => {
-    const {email,name, text} = data.val();
+    const {userEmail,name, text} = data.val();
     var outputText = text;
-    const msg = `<li class="${email == email ? "msg my": "msg"}"><span class = "msg-span">
+    const msg = `<li class="${email == userEmail ? "msg my": "msg"}"><span class = "msg-span">
       <i class = "name">${name}: </i>${outputText}
       </span>
     </li>`

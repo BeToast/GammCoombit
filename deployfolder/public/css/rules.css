@@ -5,16 +5,24 @@
 }
 
 body{
-    background: rgb(96, 99, 99);
+    /*background: rgb(96, 99, 99);*/
+    /*background-color: #cccccc;*/
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
+.rule-title{
+    color: #a665e3;
+    font-size: xxx-large;
+    /*background: #2d3562;*/
+    border-radius: 20px;
+}
+
 .row{
-    background: rgb(58, 56, 56);
+    background: #2d3562;
     border-radius: 30px;
-    box-shadow: 12px 12px 22px rgb(255, 255, 255);
+    box-shadow: 12px 12px 22px #a665e3;
 }
     
 img{

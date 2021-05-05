@@ -1,7 +1,6 @@
-
-//const msgBtn = document.getElementById("logout-button");
+//const msgButton = document.getElementById("logout-button");
 //function init() {
-//	msgBtn.addEventListener("click", logout);
+//	msgButton.addEventListener("click", logout);
 //}
 function logout() {
 	firebase.auth().signOut().then(() => {

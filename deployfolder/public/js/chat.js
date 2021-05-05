@@ -1,4 +1,3 @@
-
   firebase.initializeApp( {
     apiKey: "AIzaSyAgH3rk-JsYHUGzNBBOLxdrVEW5ZO2KCO8",
     authDomain: "ourgame-c7b54.firebaseapp.com",

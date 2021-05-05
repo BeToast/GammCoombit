@@ -5,7 +5,7 @@ html {
 }
 body{
 overflow-x: hidden;
-background-color: #012d54;
+background-color: #0a2830;;
 
 }
 
@@ -25,7 +25,7 @@ background-color: #012d54;
 }
 #chessBoard div:nth-child(odd) span:nth-child(even),
 #chessBoard div:nth-child(even) span:nth-child(odd){
-  background-color: #f956fd;
+  background-color: #019b9b;;
 }
 #chessBoard div:nth-child(even) span:nth-child(even),
 #chessBoard div:nth-child(odd) span:nth-child(odd){

@@ -219,21 +219,20 @@ a:active {
 
 /* Track */
 #chat-window::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px  rgb(24, 11, 29);
-  ; 
+  box-shadow: inset 0 0 5px  #5483cb;
   border-radius: 20px;
 }
 
 /* Handle */
 #chat-window::-webkit-scrollbar-thumb {
   box-shadow: inset 0 0 5px grey; 
-  background: rgb(24, 11, 29);
+  background: #5483cb;
   border-radius: 20px;
 }
 
 /* Handle on hover */
 #chat-window::-webkit-scrollbar-thumb:hover {
-  background:rgb(236, 8, 42); 
+  background:#ef8263; 
 }
 #logout-button{
   width: 9%;

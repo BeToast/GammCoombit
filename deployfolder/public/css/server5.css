@@ -5,7 +5,7 @@ html {
 }
 body{
 overflow-x: hidden;
-background-color: #5483cb;
+background-color: #012d54;
 
 }
 
@@ -25,11 +25,11 @@ background-color: #5483cb;
 }
 #chessBoard div:nth-child(odd) span:nth-child(even),
 #chessBoard div:nth-child(even) span:nth-child(odd){
-  background-color: #b4c1ee;
+  background-color: #f956fd;
 }
 #chessBoard div:nth-child(even) span:nth-child(even),
 #chessBoard div:nth-child(odd) span:nth-child(odd){
-  background-color:#ef8263;
+  background-color:#9461fe;
 }
 #chessBoard div:nth-child(1) span:nth-child(4),
 #chessBoard div:nth-child(4) span:nth-child(1){
@@ -53,7 +53,7 @@ display: inline-block;
   padding:10px;
   border-radius: 20px;
   font-size: xx-large;
-  background-color: #5483cb;
+  background-color: #f956fd;
   color: #f8f1de;
   margin: 15px 5px 0px 0px;
   left: -2vw;
@@ -69,7 +69,7 @@ display: inline-block;
   padding:10px;
   border-radius: 20px;
   font-size: x-large;
-  background-color: #5483cb;
+  background-color: #f956fd;
   color: #f8f1de;
   margin: 15px 5px 0px 0px;
   left: -2vw;
@@ -146,7 +146,7 @@ a:active {
 }
 
 #messageForm{
-  background-color: #5483cb;
+  background-color: #012d54;
   position: absolute;
   bottom: -65px;
   padding: 10px;
@@ -173,8 +173,7 @@ a:active {
   margin-left: 1%;
 }
 #msg-btn:hover{
-  background-color:#ef8263;
-  ;
+  background-color:#f956fd;
 }
 
 .msg{
@@ -186,8 +185,8 @@ a:active {
   padding:10px;
   border-radius: 20px;
   font-size: large;
-  background-color: ef8263;
-  color: rgb(255, 235, 227);
+  background-color:#012d54;
+  color: #dddcfc;
   margin: 15px 5px 0px 0px;
   text-align: left;
 }
@@ -200,8 +199,8 @@ a:active {
 }
 
 .my span{
-  color: rgb(255, 235, 227);
-  background-color: #5483cb;
+  color: #dddcfc;
+  background-color: #9461fe;
   margin-right: 20px;
 }
 

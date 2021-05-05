@@ -6,29 +6,6 @@ html {
   body{
   overflow-x: hidden;
   }
-  #chessBoard span{
-  
-    display: inline-block;
-    position: relative;
-    top:15px;
-    left: 5vw;
-    width: 10vw; 
-    height: 20vh;
-    outline:4px solid black;
-    padding-bottom: 10vw;
-  }
-  #chessBoard div:nth-child(odd) span:nth-child(even),
-  #chessBoard div:nth-child(even) span:nth-child(odd){
-    background-color: white;
-  }
-  #chessBoard div:nth-child(even) span:nth-child(even),
-  #chessBoard div:nth-child(odd) span:nth-child(odd){
-    background-color:rgb(41, 39, 35);
-  }
-  #chessBoard div:nth-child(1) span:nth-child(4),
-  #chessBoard div:nth-child(4) span:nth-child(1){
-    background-color:gray;
-  }
   .nav-item
   {
   color: orange;
@@ -83,7 +60,7 @@ html {
   }  
   
   .chat-window{
-    height: 72vh;
+    height: 74vh;
     width: 50vw;
     overflow-y: scroll;
     background-color: white;
@@ -119,7 +96,7 @@ html {
     position: absolute;
     bottom: -23px;
     padding: 10px;
-    width: 128%;
+    width: 50vw;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
   }

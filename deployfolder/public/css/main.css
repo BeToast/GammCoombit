@@ -6,7 +6,9 @@ html {
   body{
   overflow-x: hidden;
   background-color: rgb(24, 11, 29);
+  
   }
+  
   #chessBoard span{
   
     display: inline-block;
@@ -39,7 +41,7 @@ html {
   }
   .page-footer
   {
-  top:34px;
+  top:52px;
   position:relative;
   width:100%;
   color: rgb(236, 8, 42);

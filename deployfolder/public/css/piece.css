@@ -1,4 +1,4 @@
-.wR,.bR,.wK,.bK,.wB,.bB
+.wR,.bR,.wK,.bK,.wB,.bB,.moveable
 {
     background-repeat: no-repeat;
     background-position: center; 
@@ -34,4 +34,9 @@
 .bB
 {
     background-image: url("../img/bB.png");
+}
+
+.moveable
+{
+    background-image: url("../img/moveable.png");
 }

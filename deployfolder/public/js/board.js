@@ -1,73 +1,118 @@
+var whiteTurn = true;
+var blackTurn = false;
+var checkFrom = "";
+var attackedSquares = [];
 //functions uphere will get called throughout the program
-function dragstart_handler(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
-    getPossibleMoves(ev.target.id, ev.target.className);
+
+function toggleTurn(){
+    whiteTurn = !whiteTurn;
+    blackTurn = !blackTurn;
+    var chessBoard = document.getElementById("chessBoard");
+    var el = new Array(16);
+    el = chessBoard.getElementsByTagName("span");
+    for(var i = 0; i <= 15; i++){
+        var piece = el[i].className;
+        if(piece === "wK"||piece === "wR"||piece === "wB"){
+            el[i].setAttribute("draggable", whiteTurn);
+        }else if(piece === "bK"||piece === "bR"||piece === "bB"){
+            el[i].setAttribute("draggable", blackTurn);
+        }
+    }
+    checkFrom = isCheck();
+    getAttackedSquares();
+    if(whiteTurn)  
+        console.log("white to move");
+    else if(blackTurn)
+        console.log("black to move");
+}
+
+function getAttackedSquares(){
+    attackedSquares = [];
+    var chessBoard = document.getElementById("chessBoard"), i = 0;
+    if(whiteTurn){
+        var R = chessBoard.getElementsByClassName("bR");
+        var B = chessBoard.getElementsByClassName("bB");
+    } else {
+        var R = chessBoard.getElementsByClassName("wR");
+        var B = chessBoard.getElementsByClassName("wB");
+    }
+    for(var index = 0; index < R.length; index++) {
+        colVal = R[index].id.charCodeAt(0), rowVal = parseInt(R[index].id.charAt(1));
+        attackedSquares[i] = (String.fromCharCode(colVal-1)+rowVal); i++;
+        attackedSquares[i] = (String.fromCharCode(colVal+1)+rowVal); i++;
+        attackedSquares[i] = (String.fromCharCode(colVal)+(rowVal-1)); i++;
+        attackedSquares[i] = (String.fromCharCode(colVal)+(rowVal+1)); i++;        
+    }
+    if(B[0] !== undefined){
+        colVal = B[0].id.charCodeAt(0), rowVal = parseInt(B[0].id.charAt(1));
+        attackedSquares[i] = (String.fromCharCode(colVal-1)+(rowVal-1)); i++;
+        attackedSquares[i] = (String.fromCharCode(colVal-1)+(rowVal+1)); i++;
+        attackedSquares[i] = (String.fromCharCode(colVal+1)+(rowVal-1)); i++;
+        attackedSquares[i] = (String.fromCharCode(colVal+1)+(rowVal+1)); i++;
+    }
+}
+
+function makeDropabble(el, pieceColor){
+    if(el.className.charAt(0) !== pieceColor){
+      el.setAttribute("ondrop","drop_handler(event)");
+      el.setAttribute("ondragover","dragover_handler(event)");
+      el.classList.add("moveable");
+    }
+}
+
+function resetDroppable(){
+    var chessBoard = document.getElementById("chessBoard");
+    var el = new Array(16);
+    var el = chessBoard.getElementsByTagName("span");
+    for(var i = 0; i <= 15; i++){
+        el[i].removeAttribute("ondrop");
+        el[i].removeAttribute("ondragover");
+        el[i].classList.remove("moveable");
+    }
+}
+
+function isAttacked(square){
+    if(whiteTurn && square.id === "d4"){
+        return false;
+    } else if(blackTurn && square.id === "a1"){
+        return false;
+    }
+    for(var i = 0; i < attackedSquares.length; i++){
+        if(square.id !== attackedSquares[i]){
+        } else {
+            return false;
+        }
+    }
+    return true;
 }
 
 function drop_handler(ev) {
+    resetDroppable();
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
     var prev = document.getElementById(data);
     ev.target.className = prev.className;
     ev.target.setAttribute("draggable","true");
     ev.target.setAttribute("onDragStart", "dragstart_handler(event)");
+    ev.target.setAttribute("ondragend", "dragend_handler()");
     prev.className = "O";
     prev.removeAttribute("draggable");
     prev.removeAttribute("onDragStart");
+    prev.removeAttribute("onDragEnd");
+    toggleTurn();
+}
+
+function dragstart_handler(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+    getPossibleMoves(ev.target.id, ev.target.className);
+}
+
+function dragend_handler(){
     resetDroppable();
 }
 
 function dragover_handler(ev) {
     ev.preventDefault();
-}
-  
-function getPossibleMoves(id, piece){
-    colVal = id.charCodeAt(0), rowVal = parseInt(id.charAt(1)), pieceType = piece.charAt(1), pieceColor = piece.charAt(0);
-    if((colVal-1) >= 97){
-    makeDropabble(document.getElementById(""+String.fromCharCode(colVal-1)+rowVal+""),pieceColor);
-    }
-    if((colVal+1) <= 100){
-    makeDropabble(document.getElementById(""+String.fromCharCode(colVal+1)+rowVal+""),pieceColor);
-    }
-    if((rowVal-1) >= 1){
-    makeDropabble(document.getElementById(""+String.fromCharCode(colVal)+(rowVal-1)+""),pieceColor);
-    }
-    if((rowVal+1) <= 4){
-    makeDropabble(document.getElementById(""+String.fromCharCode(colVal)+(rowVal+1)+""),pieceColor);
-    }
-    if(pieceType === "K" || pieceType === "B") {
-        if((colVal-1) >= 97 && (rowVal-1) >= 1){
-            makeDropabble(document.getElementById(""+String.fromCharCode(colVal-1)+(rowVal-1)+""),pieceColor);
-        }
-        if((colVal-1) <= 100 && (rowVal+1) <= 4){
-            makeDropabble(document.getElementById(""+String.fromCharCode(colVal-1)+(rowVal+1)+""),pieceColor);
-        }
-        if((colVal+1) >= 97 && (rowVal-1) >= 1){
-            makeDropabble(document.getElementById(""+String.fromCharCode(colVal+1)+(rowVal-1)+""),pieceColor);
-        }
-        if((colVal+1) <= 100 && (rowVal+1) <= 4){
-            makeDropabble(document.getElementById(""+String.fromCharCode(colVal+1)+(rowVal+1)+""),pieceColor);
-        }
-    }
-}
-  
-function makeDropabble(el, pieceColor){
-    if(el.className.charAt(0) !== pieceColor){
-      el.setAttribute("ondrop","drop_handler(event)");
-      el.setAttribute("ondragover","dragover_handler(event)");
-      //el.classList.add("moveable");
-    }
-}
-  
-function resetDroppable(){ //this only works if the board is the only span tags.
-    var chessBoard = document.getElementById("chessBoard");
-    var el = new Array(16);
-    var el = chessBoard.getElementsByTagName("span");
-    for(var i = 0; i <= 16; i++){
-        el[i].removeAttribute("ondrop");
-        el[i].removeAttribute("ondragover");
-        //el[i].classList.remove("moveable");
-    }
 }
   
 function settings() {
@@ -76,6 +121,283 @@ function settings() {
   
 function off() {
     document.getElementById("chessBoard").style.display = "none";
+}
+
+function isCheck(){
+    if(whiteTurn){
+        var el = document.getElementsByClassName("wK");
+        var checkColor = "b";
+    } else {
+        var el = document.getElementsByClassName("bK");
+        var checkColor = "w";
+    }
+    colVal = el[0].id.charCodeAt(0), rowVal = parseInt(el[0].id.charAt(1)), pieceType = el[0].className.charAt(1), pieceColor = el[0].className.charAt(0);
+    if((colVal-1) >= 97){
+        var target = document.getElementById(String.fromCharCode(colVal-1)+rowVal)
+        if(target.className === ""+checkColor+"R"){
+            return target.id;
+        }
+    }
+    if((colVal+1) <= 100){
+        var target = document.getElementById(String.fromCharCode(colVal+1)+rowVal);
+        if(target.className === ""+checkColor+"R"){
+            return target.id;
+        }
+    }
+    if((rowVal-1) >= 1){
+        var target = document.getElementById(String.fromCharCode(colVal)+(rowVal-1))
+        if(target.className === ""+checkColor+"R"){
+            return target.id;
+        }
+    }
+    if((rowVal+1) <= 4){
+        var target = document.getElementById(String.fromCharCode(colVal)+(rowVal+1));
+        if(target.className === ""+checkColor+"R"){
+            return target.id;
+        }
+    }
+    if((colVal-1) >= 97 && (rowVal-1) >= 1){
+        var target = document.getElementById(String.fromCharCode(colVal-1)+(rowVal-1));
+        if(target.className === ""+checkColor+"B"){
+            return target.id;
+        }
+    }
+    if((colVal-1) >= 97 && (rowVal+1) <= 4){
+        var target = document.getElementById(String.fromCharCode(colVal-1)+(rowVal+1));
+        if(target.className === ""+checkColor+"B"){
+            return target.id;
+        }
+    }
+    if((colVal+1) <= 100 && (rowVal-1) >= 1){
+        var target = document.getElementById(String.fromCharCode(colVal+1)+(rowVal-1));
+        if(target.className === ""+checkColor+"B"){
+            return target.id;
+        }
+    }
+    if((colVal+1) <= 100 && (rowVal+1) <= 4){
+        var target = document.getElementById(String.fromCharCode(colVal+1)+(rowVal+1));
+        if(target.className === ""+checkColor+"B"){
+            return target.id;
+        }
+    }
+    return "";
+}
+
+function getPossibleMoves(id, piece){
+    colVal = id.charCodeAt(0), rowVal = parseInt(id.charAt(1)), pieceType = piece.charAt(1), pieceColor = piece.charAt(0);
+    if(checkFrom === ""){
+        switch(pieceType){
+            case "R":
+                if((colVal-1) >= 97){
+                    makeDropabble(document.getElementById(String.fromCharCode(colVal-1)+rowVal),pieceColor);
+                }
+                if((colVal+1) <= 100){
+                    makeDropabble(document.getElementById(String.fromCharCode(colVal+1)+rowVal),pieceColor);
+                }
+                if((rowVal-1) >= 1){
+                    makeDropabble(document.getElementById(String.fromCharCode(colVal)+(rowVal-1)),pieceColor);
+                }
+                if((rowVal+1) <= 4){
+                    makeDropabble(document.getElementById(String.fromCharCode(colVal)+(rowVal+1)),pieceColor);
+                }
+                break;
+            case "B":
+                if((colVal-1) >= 97){
+                    var target = document.getElementById(String.fromCharCode(colVal-1)+rowVal);
+                    if(target.className === "O"){
+                        makeDropabble(target,pieceColor);
+                    }
+                }
+                if((colVal+1) <= 100){
+                    var target = document.getElementById(String.fromCharCode(colVal+1)+rowVal);
+                    if(target.className === "O"){
+                        makeDropabble(target,pieceColor);
+                    }
+                }
+                if((rowVal-1) >= 1){
+                    var target = document.getElementById(String.fromCharCode(colVal)+(rowVal-1));
+                    if(target.className === "O"){
+                        makeDropabble(target,pieceColor);
+                    }
+                }
+                if((rowVal+1) <= 4){
+                    var target = document.getElementById(String.fromCharCode(colVal)+(rowVal+1));
+                    if(target.className === "O"){
+                        makeDropabble(target,pieceColor);
+                    }
+                }
+                if((colVal-1) >= 97 && (rowVal-1) >= 1){
+                    makeDropabble(document.getElementById(String.fromCharCode(colVal-1)+(rowVal-1)),pieceColor);
+                }
+                if((colVal-1) >= 97 && (rowVal+1) <= 4){
+                    makeDropabble(document.getElementById(String.fromCharCode(colVal-1)+(rowVal+1)),pieceColor);
+                }
+                if((colVal+1) <= 100 && (rowVal-1) >= 1){
+                    makeDropabble(document.getElementById(String.fromCharCode(colVal+1)+(rowVal-1)),pieceColor);
+                }
+                if((colVal+1) <= 100 && (rowVal+1) <= 4){
+                    makeDropabble(document.getElementById(String.fromCharCode(colVal+1)+(rowVal+1)),pieceColor);
+                }
+                break;
+            case "K":
+                if((colVal-1) >= 97){
+                    var target = document.getElementById(String.fromCharCode(colVal-1)+rowVal);
+                    if(target.className !== "wR" || target.className !== "bR"){
+                        if(isAttacked(target)){
+                            makeDropabble(target,pieceColor);
+                        }
+                    }
+                }
+                if((colVal+1) <= 100){
+                    var target = document.getElementById(String.fromCharCode(colVal+1)+rowVal);
+                    if(target.className !== "wR" || target.className !== "bR"){
+                        if(isAttacked(target)){
+                            makeDropabble(target,pieceColor);
+                        }
+                    }
+                }
+                if((rowVal-1) >= 1){
+                    var target = document.getElementById(String.fromCharCode(colVal)+(rowVal-1));
+                    if(target.className !== "wR" || target.className !== "bR"){
+                        if(isAttacked(target)){
+                            makeDropabble(target,pieceColor);
+                        }
+                    }
+                }
+                if((rowVal+1) <= 4){
+                    var target = document.getElementById(String.fromCharCode(colVal)+(rowVal+1));
+                    if(target.className !== "wR" || target.className !== "bR"){
+                        if(isAttacked(target)){
+                            makeDropabble(target,pieceColor);
+                        }
+                    }
+                }
+                if((colVal-1) >= 97 && (rowVal-1) >= 1){
+                    var target = document.getElementById(String.fromCharCode(colVal-1)+(rowVal-1));
+                    if(target.className !== "wB" || target.className !== "bB"){
+                        if(isAttacked(target)){
+                            makeDropabble(target,pieceColor);
+                        }
+                    }
+                }
+                if((colVal-1) >= 97 && (rowVal+1) <= 4){
+                    var target = document.getElementById(String.fromCharCode(colVal-1)+(rowVal+1));
+                    if(target.className !== "wB" || target.className !== "bB"){
+                        if(isAttacked(target)){
+                            makeDropabble(target,pieceColor);
+                        }
+                    }
+                }
+                if((colVal+1) <= 100 && (rowVal-1) >= 1){
+                    var target = document.getElementById(String.fromCharCode(colVal+1)+(rowVal-1));
+                    if(target.className !== "wB" || target.className !== "bB"){
+                        if(isAttacked(target)){
+                            makeDropabble(target,pieceColor);
+                        }
+                    }
+                }
+                if((colVal+1) <= 100 && (rowVal+1) <= 4){
+                    var target = document.getElementById(String.fromCharCode(colVal+1)+(rowVal+1));
+                    if(target.className !== "wB" || target.className !== "bB"){
+                        if(isAttacked(target)){
+                            makeDropabble(target,pieceColor);
+                        }
+                    }
+                }
+                break;
+        }
+    } else {
+        switch(pieceType){
+            case "R":
+                if((String.fromCharCode(colVal-1)+rowVal)===checkFrom){
+                    makeDropabble(document.getElementById(checkFrom),pieceColor);
+                }else if((String.fromCharCode(colVal+1)+rowVal)===checkFrom){
+                    makeDropabble(document.getElementById(checkFrom),pieceColor);
+                }else if((String.fromCharCode(colVal)+(rowVal-1))===checkFrom){
+                    makeDropabble(document.getElementById(checkFrom),pieceColor);
+                }else if((String.fromCharCode(colVal)+(rowVal+1))===checkFrom){
+                    makeDropabble(document.getElementById(checkFrom),pieceColor);
+                }
+                break;
+            case "B":
+                if((String.fromCharCode(colVal-1)+(rowVal-1))===checkFrom){
+                    makeDropabble(document.getElementById(checkFrom),pieceColor);
+                }else if((String.fromCharCode(colVal-1)+(rowVal+1))===checkFrom){
+                    makeDropabble(document.getElementById(checkFrom),pieceColor);
+                }else if((String.fromCharCode(colVal+1)+(rowVal-1))===checkFrom){
+                    makeDropabble(document.getElementById(checkFrom),pieceColor);
+                }else if((String.fromCharCode(colVal+1)+(rowVal+1))===checkFrom){
+                    makeDropabble(document.getElementById(checkFrom),pieceColor);
+                }
+                break;
+            case "K":
+                if((colVal-1) >= 97){
+                    var target = document.getElementById(String.fromCharCode(colVal-1)+rowVal);
+                    if(target.className.charAt(1) !== "R"){
+                        if(isAttacked(target)){
+                            makeDropabble(target,pieceColor);
+                        }
+                    }
+                }
+                if((colVal+1) <= 100){
+                    var target = document.getElementById(String.fromCharCode(colVal+1)+rowVal);
+                    if(target.className.charAt(1) !== "R"){
+                        if(isAttacked(target)){
+                            makeDropabble(target,pieceColor);
+                        }
+                    }
+                }
+                if((rowVal-1) >= 1){
+                    var target = document.getElementById(String.fromCharCode(colVal)+(rowVal-1));
+                    if(target.className.charAt(1) !== "R"){
+                        if(isAttacked(target)){
+                            makeDropabble(target,pieceColor);
+                        }
+                    }
+                }
+                if((rowVal+1) <= 4){
+                    var target = document.getElementById(String.fromCharCode(colVal)+(rowVal+1));
+                    if(target.className.charAt(1) !== "R"){
+                        if(isAttacked(target)){
+                            makeDropabble(target,pieceColor);
+                        }
+                    }
+                }
+                if((colVal-1) >= 97 && (rowVal-1) >= 1){
+                    var target = document.getElementById(String.fromCharCode(colVal-1)+(rowVal-1));
+                    if(target.className.charAt(1) !== "B"){
+                        if(isAttacked(target)){
+                            makeDropabble(target,pieceColor);
+                        }
+                    }
+                }
+                if((colVal-1) >= 97 && (rowVal+1) <= 4){
+                    var target = document.getElementById(String.fromCharCode(colVal-1)+(rowVal+1));
+                    if(target.className.charAt(1) !== "B"){
+                        if(isAttacked(target)){
+                            makeDropabble(target,pieceColor);
+                        }
+                    }
+                }
+                if((colVal+1) <= 100 && (rowVal-1) >= 1){
+                    var target = document.getElementById(String.fromCharCode(colVal+1)+(rowVal-1));
+                    if(target.className.charAt(1) !== "B"){
+                        if(isAttacked(target)){
+                            makeDropabble(target,pieceColor);
+                        }
+                    }
+                }
+                if((colVal+1) <= 100 && (rowVal+1) <= 4){
+                    var target = document.getElementById(String.fromCharCode(colVal+1)+(rowVal+1));
+                    if(target.className.charAt(1) !== "B"){
+                        if(isAttacked(target)){
+                            makeDropabble(target,pieceColor);
+                        }
+                    }
+                }
+                break;
+        }
+    }
 }
 
 window.onload = function() {
@@ -112,8 +434,11 @@ window.onload = function() {
         var tempClass = defaultBoard[i][j];
         square.className = tempClass;
         if(tempClass==="wR"||tempClass==="bR"||tempClass==="wK"||tempClass==="bK"||tempClass==="wB"||tempClass==="bB"){
-            square.setAttribute("draggable", "true");
+            if(tempClass==="wR"||tempClass==="wK"||tempClass==="wB"){
+                square.setAttribute("draggable", "true");
+            }
             square.setAttribute("onDragStart", "dragstart_handler(event)");
+            square.setAttribute("ondragend", "dragend_handler()");
         }else{
             square.className = "O";
         }

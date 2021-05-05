@@ -5,10 +5,8 @@ html {
 }
 body{
 overflow-x: hidden;
-background-color: #0a2830;;
-
+background-color: #bee871;
 }
-
 #chessBoard span{
 
   display: inline-block;
@@ -17,7 +15,7 @@ background-color: #0a2830;;
   left: 5vw;
   width: 10vw; 
   height: 20vh;
-  outline:4px solid #0a2830;
+  outline:4px solid black;
   padding-bottom: 10vw;
   border-radius: 5px;
   /*border-bottom-left-radius: 50px;
@@ -25,7 +23,7 @@ background-color: #0a2830;;
 }
 #chessBoard div:nth-child(odd) span:nth-child(even),
 #chessBoard div:nth-child(even) span:nth-child(odd){
-  background-color:  #019b9b;
+  background-color: #019b9b;
 }
 #chessBoard div:nth-child(even) span:nth-child(even),
 #chessBoard div:nth-child(odd) span:nth-child(odd){
@@ -33,7 +31,7 @@ background-color: #0a2830;;
 }
 #chessBoard div:nth-child(1) span:nth-child(4),
 #chessBoard div:nth-child(4) span:nth-child(1){
-  background-color:white;
+  background-color:rgb(255, 235, 227);
 }
 .nav-item
 {
@@ -49,15 +47,19 @@ color: rgb(255, 255, 255);;
 } 
 .card-title
 {
+display: inline-block;
   padding:10px;
   border-radius: 20px;
-  font-size: xxxx-large;
-  color: #0a2830;
+  font-size: xx-large;
+  background-color: #f956fd;
+  color: #f8f1de;
+  margin: 15px 5px 0px 0px;
   left: -2vw;
   top: 1vh;
   height: -100vh;
   position: relative;
   margin: auto;
+  box-sizing: border-box;
 }
 
 .quit{
@@ -65,7 +67,7 @@ color: rgb(255, 255, 255);;
   padding:10px;
   border-radius: 20px;
   font-size: x-large;
-  background-color: #0a2830;
+  background-color: #f956fd;
   color: #f8f1de;
   margin: 15px 5px 0px 0px;
   left: -2vw;
@@ -142,12 +144,13 @@ a:active {
 }
 
 #messageForm{
-  background-color: #0a2830;
+  background-color: #012d54;
   position: absolute;
   bottom: -65px;
   padding: 10px;
   width: 100%;
-  border-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 #msg-input{
   padding: 10px;
@@ -168,7 +171,7 @@ a:active {
   margin-left: 1%;
 }
 #msg-btn:hover{
-  background-color: #dc9db5;
+  background-color:#f956fd;
 }
 
 .msg{
@@ -180,8 +183,8 @@ a:active {
   padding:10px;
   border-radius: 20px;
   font-size: large;
-  background-color: #dc9db5;
-  color: #05141a;
+  background-color:#012d54;
+  color: #dddcfc;
   margin: 15px 5px 0px 0px;
   text-align: left;
 }
@@ -194,8 +197,8 @@ a:active {
 }
 
 .my span{
-  color: #05141a;
-  background-color: #bee871;
+  color: #dddcfc;
+  background-color: #9461fe;
   margin-right: 20px;
 }
 
@@ -227,7 +230,7 @@ a:active {
 
 /* Handle on hover */
 #chat-window::-webkit-scrollbar-thumb:hover {
-  background:#dc9db5; 
+  background:rgb(236, 8, 42); 
 }
 #logout-button{
   width: 9%;

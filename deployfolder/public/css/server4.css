@@ -5,8 +5,10 @@ html {
 }
 body{
 overflow-x: hidden;
-background-color: #bee871;
+background-color: #0a2830;;
+
 }
+
 #chessBoard span{
 
   display: inline-block;
@@ -23,11 +25,11 @@ background-color: #bee871;
 }
 #chessBoard div:nth-child(odd) span:nth-child(even),
 #chessBoard div:nth-child(even) span:nth-child(odd){
-  background-color: #019b9b;
+  background-color: #019b9b;;
 }
 #chessBoard div:nth-child(even) span:nth-child(even),
 #chessBoard div:nth-child(odd) span:nth-child(odd){
-  background-color:#bee871;
+  background-color:#9461fe;
 }
 #chessBoard div:nth-child(1) span:nth-child(4),
 #chessBoard div:nth-child(4) span:nth-child(1){

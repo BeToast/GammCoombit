@@ -8,9 +8,6 @@ function register()
         displayName: document.getElementById("nicknameField").value
     })
 	}
-        return result.user.updateProfile({
-			displayName: document.getElementById("nicknameField").value
-        })
 		window.location.href = "login.html"
 	})
         .catch((error) => {

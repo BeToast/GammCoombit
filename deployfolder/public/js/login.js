@@ -8,7 +8,7 @@ function login()
             var user = userCredential.user;
             // If successful redirect to a secure page
 			document.cookie = "accessToken=" + user.za;
-            window.location.href = "index.html"
+            window.location.href = "lobby.html"
             console.log(user);
             // ...
         })

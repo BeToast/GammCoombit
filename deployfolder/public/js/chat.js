@@ -19,7 +19,7 @@
   const msgRef = db.ref("/msgs");
 
   function init() {
-      msgForm.addEventListener('submit', sendMessage);
+      msgBtn.addEventListener('click', sendMessage);
       msgRef.on('child_added', updateMsgs);
   }
   const updateMsgs = data => {

@@ -6,7 +6,7 @@ function logout() {
 	firebase.auth().signOut().then(() => {
 			// Sign-out successful.
 			document.cookie = "accessToken= ";
-			window.location.href = "login.html"
+			window.location.href = "index.html"
 		}).catch((error) => {
 			// An error happened.
 		});

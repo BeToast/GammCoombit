@@ -18,7 +18,7 @@ function getSecureApi(){
             }
         else {
             console.log('Error: ' + xhr.status); // An error occurred during the request.
-			window.location.href = "login.html"
+			window.location.href = "index.html"
         }
     };
     // Set the Authorization header

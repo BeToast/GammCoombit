@@ -9,7 +9,7 @@ function checkUser()
 			}
 		} else {
 			//console.log('login not working :(');
-			window.location.href = 'login.html'
+			window.location.href = 'index.html'
 		}
 	});
 }

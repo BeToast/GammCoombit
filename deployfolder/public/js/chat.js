@@ -27,7 +27,7 @@
   const msgRef = db.ref("/msgs");
 
   function init() {
-      msgForm.addEventListener('submit', sendMessage);
+      msgBtn.addEventListener("click", sendMessage);
       msgRef.on('child_added', updateMsgs);
   }
   const updateMsgs = data => {
@@ -44,7 +44,7 @@
   function sendMessage(e) {
     e.preventDefault();
     const text = msgInput.value;
-      if(!text.trim()) return alert('Palese tpye yuor mesagse.');
+      if(!text.trim()) return;
         const msg = {
 		  email,
 		  name,

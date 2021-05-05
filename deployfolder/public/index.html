@@ -18,10 +18,10 @@
 	</script>
 </head>
 <body>
-<div style="background-image: url('img/epicbg.jpg');">
+<div style="background-image: url('img/lava.png');">
 	<div class="row">
-		<h1 class ="card-title bg-dark text-center mb-2" >The Gamm Cumbit
-		</h1>
+		<h1 class ="card-title" >The Gamm Cumbit</h1>
+		<h2><a href ="lobby.html" class= "quit">leave</a></h2>
 	</div>
 	<div class="row">
 		<div id="chessBoard">
@@ -30,26 +30,28 @@
 			<div class = "chat-window" id = "chat-window">
 			  <ul id = "messages">
 					<li class="msg">
+						<span class = "msg-span"><i class = "name">Host: </i>Show me your tits!</span>
 					</li>
 					<li class="msg my">
+						<span class = "msg-span"><i class = "name">Host: </i>The dities! AAAAAH!</span>
 					</li>
 			  </ul>
 			  <form id = "messageForm" autocomplete="off">
 				<input type = "text" id = "msg-input" placeholder="Enter a message">
 				<button id = "msg-btn">Send</button>
-				<button id = "logout-button">Quit</button>
+				<!--<button id = "logout-button" OnClick="lobby()">Quit</button>-->
 			  </form>
 			</div>
 		  </div>
 	</div>
 	<div class="row">
-		<footer class="page-footer bg-dark mt-5">
-			<div class="footer-copyright text-center py-3 text-warning">© 2021 Copyright</div>
+		<footer class="page-footer mt-5">
+			<div class="footer-copyright text-center py-3">© 2021 Copyright</div>
 		</footer>
 	</div>
 </div>
 <script src="js/chat.js"></script>
-<script src="js/redirects.js"></script>
+<script src="js/redirect.js"></script>
 <script src="js/board.js"></script>
 <script src="js/checkuser.js"></script>
 <script src="js/getSecureApi.js"></script>

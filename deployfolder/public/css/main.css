@@ -5,6 +5,7 @@ html {
   }
   body{
   overflow-x: hidden;
+  background-color: rgb(24, 11, 29);
   }
   #chessBoard span{
   
@@ -16,18 +17,21 @@ html {
     height: 20vh;
     outline:4px solid black;
     padding-bottom: 10vw;
+    border-radius: 5px;
+    /*border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;*/
   }
   #chessBoard div:nth-child(odd) span:nth-child(even),
   #chessBoard div:nth-child(even) span:nth-child(odd){
-    background-color: white;
+    background-color: rgb(24, 11, 29);
   }
   #chessBoard div:nth-child(even) span:nth-child(even),
   #chessBoard div:nth-child(odd) span:nth-child(odd){
-    background-color:orange;
+    background-color:rgb(236, 8, 42);
   }
   #chessBoard div:nth-child(1) span:nth-child(4),
   #chessBoard div:nth-child(4) span:nth-child(1){
-    background-color:gray;
+    background-color:rgb(255, 235, 227);
   }
   .nav-item
   {
@@ -38,16 +42,63 @@ html {
   top:10px;
   position:relative;
   width:100%;
+  color: rgb(236, 8, 42);
   
   } 
   .card-title
   {
-  position: relative;
-  width:100%;
-  color: orange;
-  text-align: center;
-  
+  display: inline-block;
+    padding:10px;
+    border-radius: 20px;
+    font-size: xx-large;
+    background-color: rgb(0, 0, 0);
+    color: rgb(236, 8, 42);
+    margin: 15px 5px 0px 0px;
+    left: -2vw;
+    top: 1vh;
+    height: -100vh;
+    position: relative;
+    margin: auto;
+    box-sizing: border-box;
   }
+
+  .quit{
+    display: inline-block;
+    padding:10px;
+    border-radius: 20px;
+    font-size: x-large;
+    background-color: rgb(0, 0, 0);
+    color: black;
+    margin: 15px 5px 0px 0px;
+    left: -2vw;
+    top: 1vh;
+    height: -100vh;
+    position: relative;
+    margin: auto;
+    box-sizing: border-box;
+  }
+
+  /* unvisited link */
+  a:link {
+    color: rgb(0, 0, 0);
+  }
+  
+  /* visited link */
+  a:visited {
+    color: rgb(255, 255, 255);
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: hotpink;
+  }
+  
+  /* selected link */
+  a:active {
+    color: rgb(255, 255, 255);
+  }
+
+
   #chat{
     position: relative;
     top: 110px;
@@ -85,7 +136,7 @@ html {
     height: 77vh;
     width: 40vw;
     overflow-y: scroll;
-    background-color: white;
+    /*background-color: white;*/
     border-radius: 10px;
     -webkit-box-shadow: 22px 24px 18px -10px rgba(0,0,0,0.35);
     -moz-box-shadow: 22px 24px 18px -10px rgba(0,0,0,0.35);
@@ -93,7 +144,7 @@ html {
   }
   
   #messageForm{
-    background-color: orange;
+    background-color: rgb(24, 11, 29);
     position: absolute;
     bottom: -65px;
     padding: 10px;
@@ -105,7 +156,7 @@ html {
   #msg-input{
     padding: 10px;
     border-radius: 20px;
-    width:75%;
+    width:85%;
     margin-left: 2%;
   }
   
@@ -114,7 +165,7 @@ html {
     padding: 9px;
     border-radius: 20px;
     cursor: pointer;
-    background-color: white;
+    background-color: rgb(255, 235, 227);
     font-size: large;
     color:black;
     font-weight: bold;
@@ -123,7 +174,8 @@ html {
   }
   
   #msg-btn:hover{
-    background-color: grey;
+    background-color:rgb(236, 8, 42);
+    ;
   }
   
   .msg{
@@ -135,8 +187,8 @@ html {
     padding:10px;
     border-radius: 20px;
     font-size: large;
-    background-color: orange;
-    color: black;
+    background-color: rgb(24, 11, 29);
+    color: rgb(255, 235, 227);
     margin: 15px 5px 0px 0px;
     text-align: left;
   }
@@ -149,8 +201,8 @@ html {
   }
   
   .my span{
-    color: white;
-    background-color: grey;
+    color: rgb(255, 235, 227);
+    background-color: rgb(236, 8, 42);
     margin-right: 20px;
   }
   
@@ -168,27 +220,28 @@ html {
   
   /* Track */
   #chat-window::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey; 
+    box-shadow: inset 0 0 5px  rgb(24, 11, 29);
+    ; 
     border-radius: 20px;
   }
   
   /* Handle */
   #chat-window::-webkit-scrollbar-thumb {
     box-shadow: inset 0 0 5px grey; 
-    background: grey;
+    background: rgb(24, 11, 29);
     border-radius: 20px;
   }
   
   /* Handle on hover */
   #chat-window::-webkit-scrollbar-thumb:hover {
-    background:grey; 
+    background:rgb(236, 8, 42); 
   }
   #logout-button{
     width: 9%;
     padding: 9px;
     border-radius: 20px;
     cursor: pointer;
-    background-color: white;
+    background-color: rgb(255, 235, 227);
     font-size: large;
     color:black;
     font-weight: bold;
@@ -196,5 +249,6 @@ html {
     margin-left: 1%;
   }
   #logout-button:hover{
-    background-color: red;
+    background-color: rgb(236, 8, 42);
+    ;
   }

@@ -1,3 +1,4 @@
+
 const msgBtn = document.getElementById("logout-button");
 function init() {
 	msgBtn.addEventListener("click", logout);

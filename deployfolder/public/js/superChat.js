@@ -23,7 +23,7 @@
   const msgBtn = document.getElementById("msg-btn");
 
   const db = firebase.database();
-  const msgRef = db.ref("/server1Chat");
+  const msgRef = db.ref("/superChat");
 
   function init() {
       msgBtn.addEventListener("click", sendMessage);

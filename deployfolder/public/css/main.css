@@ -39,7 +39,7 @@ html {
   }
   .page-footer
   {
-  top:10px;
+  top:34px;
   position:relative;
   width:100%;
   color: rgb(236, 8, 42);
@@ -124,7 +124,7 @@ html {
   .chat{
     padding-top: 1vh;
     left: 3vw;
-    top: vh;
+    top: 1vh;
     height: 80vh;
     position: relative;
     margin: auto;
@@ -152,14 +152,12 @@ html {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
   }
-  
   #msg-input{
     padding: 10px;
     border-radius: 20px;
     width:85%;
     margin-left: 2%;
   }
-  
   #msg-btn{
     width: 9%;
     padding: 9px;
@@ -172,7 +170,6 @@ html {
     border: none;
     margin-left: 1%;
   }
-  
   #msg-btn:hover{
     background-color:rgb(236, 8, 42);
     ;

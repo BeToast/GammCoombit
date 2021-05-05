@@ -8,7 +8,7 @@ function getSecureApi(){
         }
     });
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'https://cors-anywhere.herokuapp.com/https://us-central1-ourgame-c7b54.cloudfunctions.net/authorizedendpoint');
+    xhr.open('GET', 'https://us-central1-ourgame-c7b54.cloudfunctions.net/authorizedendpoint');
 
 // Track the state changes of the request.
     xhr.onreadystatechange = function () {

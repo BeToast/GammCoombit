@@ -5,7 +5,7 @@ html {
 }
 body{
 overflow-x: hidden;
-background-color: #5483cb;
+background-color: #13242c;
 
 }
 
@@ -25,11 +25,11 @@ background-color: #5483cb;
 }
 #chessBoard div:nth-child(odd) span:nth-child(even),
 #chessBoard div:nth-child(even) span:nth-child(odd){
-  background-color: #b4c1ee;
+  background-color: #9e8e68;
 }
 #chessBoard div:nth-child(even) span:nth-child(even),
 #chessBoard div:nth-child(odd) span:nth-child(odd){
-  background-color:#ef8263;
+  background-color:#537f6e;
 }
 #chessBoard div:nth-child(1) span:nth-child(4),
 #chessBoard div:nth-child(4) span:nth-child(1){
@@ -53,7 +53,7 @@ display: inline-block;
   padding:10px;
   border-radius: 20px;
   font-size: xx-large;
-  background-color: #5483cb;
+  background-color: #13242c;
   color: #f8f1de;
   margin: 15px 5px 0px 0px;
   left: -2vw;
@@ -69,7 +69,7 @@ display: inline-block;
   padding:10px;
   border-radius: 20px;
   font-size: x-large;
-  background-color: #5483cb;
+  background-color: #13242c;
   color: #f8f1de;
   margin: 15px 5px 0px 0px;
   left: -2vw;
@@ -146,7 +146,7 @@ a:active {
 }
 
 #messageForm{
-  background-color: #5483cb;
+  background-color: #13242c;
   position: absolute;
   bottom: -65px;
   padding: 10px;
@@ -173,7 +173,7 @@ a:active {
   margin-left: 1%;
 }
 #msg-btn:hover{
-  background-color:#ef8263;
+  background-color:#537f6e;
   ;
 }
 
@@ -186,7 +186,7 @@ a:active {
   padding:10px;
   border-radius: 20px;
   font-size: large;
-  background-color: ef8263;
+  background-color: #9e8e68;
   color: rgb(255, 235, 227);
   margin: 15px 5px 0px 0px;
   text-align: left;
@@ -201,7 +201,7 @@ a:active {
 
 .my span{
   color: rgb(255, 235, 227);
-  background-color: #5483cb;
+  background-color: #537f6e;
   margin-right: 20px;
 }
 
@@ -219,7 +219,7 @@ a:active {
 
 /* Track */
 #chat-window::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px  rgb(24, 11, 29);
+  box-shadow: inset 0 0 5px  #13242c;
   ; 
   border-radius: 20px;
 }
@@ -227,13 +227,13 @@ a:active {
 /* Handle */
 #chat-window::-webkit-scrollbar-thumb {
   box-shadow: inset 0 0 5px grey; 
-  background: rgb(24, 11, 29);
+  background: #13242c;
   border-radius: 20px;
 }
 
 /* Handle on hover */
 #chat-window::-webkit-scrollbar-thumb:hover {
-  background:rgb(236, 8, 42); 
+  background:#9e8e68; 
 }
 #logout-button{
   width: 9%;

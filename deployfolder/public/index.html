@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html>
 <head>
 	<meta charset="utf-8">
@@ -18,18 +18,17 @@
 	</script>
 </head>
 <body>
-			
-			
 <div style="background-image: url('img/epicbg.jpg');">
 	<div class="row">
-		<h1 class ="card-title bg-dark text-center mb-2">The Gamm Cumbit</h1>
+		<h1 class ="card-title bg-dark text-center mb-2" >The Gamm Cumbit
+		</h1>
 	</div>
 	<div class="row">
-		<div id="chessBoard"></div>
+		<div id="chessBoard">
+		</div>
 		<div class = "chat">
 			<div class = "chat-window" id = "chat-window">
 			  <ul id = "messages">
-				
 					<li class="msg">
 					</li>
 					<li class="msg my">
@@ -37,11 +36,11 @@
 							<i class = "name">Host: </i>Hlelo adn wlecmoe to Caht!
 						</span>
 					</li>
-					
 			  </ul>
 			  <form id = "messageForm" autocomplete="off">
 				<input type = "text" id = "msg-input" placeholder="Enter a message">
-				<button id = "msg-btn" type = "submit">Send</button>
+				<button id = "msg-btn">Send</button>
+				<button id = "logout-button">Quit</button>
 			  </form>
 			</div>
 		  </div>
@@ -53,10 +52,9 @@
 	</div>
 </div>
 <script src="js/chat.js"></script>
+<script src="js/logout.js"></script>
 <script src="js/board.js"></script>
 <script src="js/checkuser.js"></script>
 <script src="js/getSecureApi.js"></script>
-
 </body>
-
 </html>

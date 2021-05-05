@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'/>
+	<link rel="stylesheet" href="css/lobby.css">
+	<script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
+    <script src="/__/firebase/8.3.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-storage.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/node-uuid/1.4.8/uuid.min.js"></script>
+	<script src="/__/firebase/init.js"></script>
+	<script> document.addEventListener("DOMContentLoaded", function(){
+		checkUser();
+		getSecureApi();
+	});
+	</script>
+</head>
+<body>
+			
+			
+	<div style="background-image: url('img/rick.gif');">
+			<div class="row">
+				<h1 class ="card-title bg-#42f5e3 text-center mb-2">Gamm Coombat</h1>
+			</div>
+
+
+			<div class="row">
+
+				<div class= "col-md-5 col-sm-5">
+					
+					<div class="card-body">
+						<h1 class="server-list">Servers</h1>
+						
+						<p><a href ="index.html" class= "servers">Server 1</a></p>
+						<p><a href ="https://www.imdb.com/title/tt0133152/" class= "servers">Server 2</a></p>
+						<p><a href ="https://www.imdb.com/title/tt0126029/" class= "servers">Server 3</a></p>
+						<p><a href ="https://www.dublinzoo.ie/" class= "servers">Server 4</a></p>
+						<p><a href ="https://www.nationalgeographic.com/" class= "servers">Server 5</a></p>
+					</div>
+				</div>
+
+				<div class= "col-md-5 col-sm-5">
+				<div class = "chat">
+					<div class = "chat-window" id = "chat-window">
+					  <ul id = "messages">
+						
+							<li class="msg">
+							</li>
+							<li class="msg my">
+								<span class = "msg-span">
+									<i class = "name">Host: </i>Hlelo adn wlecmoe to Caht!
+								</span>
+							</li>
+							
+					  </ul>
+					  <form id = "messageForm" autocomplete="off">
+						<input type = "text" id = "msg-input" placeholder="Enter a message">
+						<button id = "msg-btn" type = "submit">Send</button>
+						<button id = "msg-btn" onclick="logout()">quit</button>
+					  </form>
+					</div>
+				  </div>
+				</div>
+			</div>
+			<div class="row">
+				<footer class="page-footer bg-dark mt-5">
+					<div class="footer-copyright text-center py-3 text-warning">© 2021 Copyright</div>
+				</footer>
+			</div>
+		</div>
+<script src="js/chat.js"></script>
+<script src="js/logout.js"></script>
+<script src="js/checkuser.js"></script>
+<script src="js/getSecureApi.js"></script>
+
+</body>
+
+</html>

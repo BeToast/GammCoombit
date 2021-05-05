@@ -1,0 +1,240 @@
+html {
+    height: 100%;
+    width: 100%;
+  
+  }
+  body{
+  overflow-x: hidden;
+  }
+  #chessBoard span{
+  
+    display: inline-block;
+    position: relative;
+    top:15px;
+    left: 5vw;
+    width: 10vw; 
+    height: 20vh;
+    outline:4px solid black;
+    padding-bottom: 10vw;
+  }
+  #chessBoard div:nth-child(odd) span:nth-child(even),
+  #chessBoard div:nth-child(even) span:nth-child(odd){
+    background-color: white;
+  }
+  #chessBoard div:nth-child(even) span:nth-child(even),
+  #chessBoard div:nth-child(odd) span:nth-child(odd){
+    background-color:rgb(41, 39, 35);
+  }
+  #chessBoard div:nth-child(1) span:nth-child(4),
+  #chessBoard div:nth-child(4) span:nth-child(1){
+    background-color:gray;
+  }
+  .nav-item
+  {
+  color: orange;
+  }
+  .page-footer
+  {
+  top:34px;
+  position:relative;
+  width:100%;
+  
+  } 
+  .card-title
+  {
+  position: relative;
+  width:100%;
+  background-color: white;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  
+  }
+  #chat{
+    position: relative;
+    top: 110px;
+  }
+  #settings{
+    position: relative;
+    top: 110px;
+    right: 150px;
+  }
+  #log-out{
+    position: relative;
+    top: 110px;
+    right: 50px;
+  }
+  
+  #user-name{
+    position: relative;
+    top:60px;
+    right: 50px;
+  }
+  
+  /*Chat box styling */
+  .chat{
+    padding-top: 2vh;
+    left: 5vw;
+    top: 1vh;
+    height: 80vh;
+    position: relative;
+    margin: auto;
+    box-sizing: border-box;
+  
+  }  
+  
+  .chat-window{
+    height: 72vh;
+    width: 50vw;
+    overflow-y: scroll;
+    background-color: white;
+    border-radius: 10px;
+    -webkit-box-shadow: 22px 24px 18px -10px rgba(0,0,0,0.35);
+    -moz-box-shadow: 22px 24px 18px -10px rgba(0,0,0,0.35);
+    box-shadow: 22px 24px 18px -10px rgba(0,0,0,0.35);
+  }
+
+  .card-body{
+    padding-top: 2vh;
+    left: 20vw;
+    top: 1vh;
+    height: -10vh;
+    position: relative;
+    margin: auto;
+    box-sizing: border-box;
+  }
+
+  .server-list{
+    color: white;
+    padding-top: 2vh;
+    left: -2vw;
+    top: 1vh;
+    height: -100vh;
+    position: relative;
+    margin: auto;
+    box-sizing: border-box;
+  }
+  
+  #messageForm{
+    background-color: rgb(49, 47, 47);
+    position: absolute;
+    bottom: -23px;
+    padding: 10px;
+    width: 128%;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  
+  #msg-input{
+    padding: 10px;
+    border-radius: 20px;
+    width: 70%;
+    margin-left: 2%;
+  }
+  
+  #msg-btn{
+    width: 11%;
+    padding: 9px;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: white;
+    font-size: large;
+    color:black;
+    font-weight: bold;
+    border: none;
+    margin-left: 1%;
+  }
+  
+  #msg-btn:hover{
+    background-color: rgb(250, 221, 140);
+  }
+  
+  .msg{
+    list-style-type: none;
+  }
+  
+  .msg-span{
+    display: inline-block;
+    padding:10px;
+    border-radius: 20px;
+    font-size: large;
+    background-color: rgb(226, 166, 179);
+    color: rgb(255, 255, 255);
+    margin: 15px 5px 0px 0px;
+    text-align: left;
+  }
+
+  .servers{
+    display: inline-block;
+    padding:10px;
+    border-radius: 20px;
+    font-size: large;
+    background-color: rgb(0, 0, 0);
+    color: black;
+    margin: 15px 5px 0px 0px;
+    text-align: left;
+  }
+  .name{
+    font-weight: bold;
+  }
+  
+  .my{
+    text-align: right;
+  }
+  
+  .my span{
+    color: white;
+    background-color: #ff5757;
+    margin-right: 20px;
+  }
+  
+  .my i{
+    display:none;
+  }
+  
+  /*Scroll styling */
+  
+  /* width */
+  #chat-window::-webkit-scrollbar {
+    width: 20px;
+    height: 50%;
+  }
+  
+  /* Track */
+  #chat-window::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 20px;
+  }
+  
+  /* unvisited link */
+  a:link {
+  color: rgb(0, 0, 0);
+  }
+
+  /* visited link */
+  a:visited {
+  color: rgb(255, 255, 255);
+  }
+
+  /* mouse over link */
+  a:hover {
+  color: hotpink;
+  }
+
+  /* selected link */
+  a:active {
+  color: rgb(255, 255, 255);
+  }
+
+  /* Handle */
+  #chat-window::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 5px grey; 
+    background:rgb(54, 53, 54);
+    border-radius: 20px;
+  }
+  
+  /* Handle on hover */
+  #chat-window::-webkit-scrollbar-thumb:hover {
+    background:rgb(54, 53, 54);
+  }
+  
+  

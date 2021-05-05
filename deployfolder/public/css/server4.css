@@ -17,23 +17,21 @@ background-color: #0a2830;;
   left: 5vw;
   width: 10vw; 
   height: 20vh;
-  outline:4px solid black;
+  outline:4px solid #37374e;
   padding-bottom: 10vw;
   border-radius: 5px;
-  /*border-bottom-left-radius: 50px;
-  border-bottom-right-radius: 50px;*/
 }
 #chessBoard div:nth-child(odd) span:nth-child(even),
 #chessBoard div:nth-child(even) span:nth-child(odd){
-  background-color: #019b9b;;
+  background-color: #b56cbe;
 }
 #chessBoard div:nth-child(even) span:nth-child(even),
 #chessBoard div:nth-child(odd) span:nth-child(odd){
-  background-color:#9461fe;
+  background-color: #eb6d9d;
 }
 #chessBoard div:nth-child(1) span:nth-child(4),
 #chessBoard div:nth-child(4) span:nth-child(1){
-  background-color:rgb(255, 235, 227);
+  background-color:#fec089;
 }
 .nav-item
 {
@@ -53,7 +51,7 @@ display: inline-block;
   padding:10px;
   border-radius: 20px;
   font-size: xx-large;
-  background-color: #f956fd;
+  background-color: #2196cc;
   color: #f8f1de;
   margin: 15px 5px 0px 0px;
   left: -2vw;
@@ -69,7 +67,7 @@ display: inline-block;
   padding:10px;
   border-radius: 20px;
   font-size: x-large;
-  background-color: #f956fd;
+  background-color: #b56cbe;
   color: #f8f1de;
   margin: 15px 5px 0px 0px;
   left: -2vw;
@@ -146,13 +144,12 @@ a:active {
 }
 
 #messageForm{
-  background-color: #012d54;
+  background-color: #37374e;
   position: absolute;
   bottom: -65px;
   padding: 10px;
   width: 100%;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-radius: 15px;
 }
 #msg-input{
   padding: 10px;
@@ -173,7 +170,7 @@ a:active {
   margin-left: 1%;
 }
 #msg-btn:hover{
-  background-color:#f956fd;
+  background-color:#fec089;
 }
 
 .msg{
@@ -232,7 +229,7 @@ a:active {
 
 /* Handle on hover */
 #chat-window::-webkit-scrollbar-thumb:hover {
-  background:rgb(236, 8, 42); 
+  background:#fec089; 
 }
 #logout-button{
   width: 9%;
@@ -247,6 +244,5 @@ a:active {
   margin-left: 1%;
 }
 #logout-button:hover{
-  background-color: #ef8263;
-  ;
+  background-color: #fec089;
 } 

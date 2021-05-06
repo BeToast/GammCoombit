@@ -1,4 +1,5 @@
 var yourColor;
+var opponentColor;
 var whiteTurn = true;
 var blackTurn = false;
 var checkFrom = "";
@@ -14,9 +15,6 @@ function init(){
 	var moveString = data.val().move;
 	console.log(moveString);
 	if(((yourColor==="white" && !whiteTurn)||(yourColor==="black" && whiteTurn))&&gameInProgress){
-		
-		
-		
 		var from = moveString.substring(0,2);
 		var to = moveString.substring(2,4);
 		document.getElementById(to).className = document.getElementById(from).className;
@@ -28,12 +26,14 @@ function init(){
 
 function joinWhite(){
     yourColor = "white";
+    opponentColor = "black";
     waitingMenu(yourColor);
     //TODO: we need to add yourEmail=yourColor to the firebase database for current game
     //maybe store you are in a game with cookie so refresing doesnt end the game?
 }
 function joinBlack(){
     yourColor = "black";
+    opponentColor = "white";
     waitingMenu(yourColor);
     //TODO: we need to add yourEmail=yourColor to the firebase database for current game
 }
@@ -41,8 +41,10 @@ function joinRandom(){
     var h = Math.random();
     if(Math.random() < .5){
         yourColor = "white";
+        opponentColor = "black";
     } else {
         yourColor = "black";
+        opponentColor = "white";
     }
     waitingMenu(yourColor);
     //TODO: we need to add yourEmail=yourColor to the firebase database for current game
@@ -61,6 +63,14 @@ function sendMoveToServer(moveString){
 function gameEnd(winner){
     //TODO: call function here to clear the moves database
     endMenu(winner);
+}
+
+function forceGameEnd(){
+    if(opponentColor==="white"){
+        sendMoveToServer(""+document.getElementsByClassName("wK")[0].id+"d4");
+    }else if(opponentColor==="black"){
+        sendMoveToServer(""+document.getElementsByClassName("bK")[0].id+"a1");
+    }
 }
 
 function toggleTurn(){

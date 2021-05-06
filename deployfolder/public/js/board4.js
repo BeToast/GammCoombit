@@ -61,7 +61,6 @@ function sendMoveToServer(moveString){
 	const newMove = {
 		move: move
 	};
-	forceEnd = true;
 	boardRef.push(newMove);
 }
 

@@ -15,7 +15,7 @@ function init(){
 	var moveString = data.val().move;
 	console.log(moveString);
 	if(((yourColor==="white" && !whiteTurn)||(yourColor==="black" && whiteTurn))&&gameInProgress){
-		var from = moveString.substring(0,2);
+	    var from = moveString.substring(0,2);
 		var to = moveString.substring(2,4);
 		document.getElementById(to).className = document.getElementById(from).className;
 		document.getElementById(from).className = "O";
@@ -23,7 +23,7 @@ function init(){
 	}
 });
 }
-
+	
 function joinWhite(){
     yourColor = "white";
     opponentColor = "black";
@@ -63,13 +63,26 @@ function sendMoveToServer(moveString){
 	boardRef.push(newMove);
 }
 
-function gameEnd(winner){
-    //TODO: call function here to clear the moves database
-	gameInProgress = false;
-	boardRef.remove();
-    endMenu(winner);
+function recieveMoveFromServer(data){
+	var recentMove = data.val().move.limitToLast(1);
+	console.log(recentMove);
+	/*if((yourColor==="white" && !whiteTurn)||(yourColor==="black" && whiteTurn)){
+		
+		
+		
+		var from = moveString.substring(0,2);
+		var to = moveString.substring(2,4);
+		document.getElementById(to).className = document.getElementById(from).className;
+		document.getElementById(from).className = "O";
+		toggleTurn();
+	}*/
 }
-
+/*
+function recieveMoveTest(){
+    let string = document.getElementById(testmovestring).innerHTML;
+    recieveMoveFromServer(string);
+}
+*/
 function forceGameEnd(){
     if(opponentColor==="white"){
         sendMoveToServer(""+document.getElementsByClassName("wK")[0].id+"d4");
@@ -78,20 +91,22 @@ function forceGameEnd(){
     }
 }
 
+function gameEnd(winner){
+    gameInProgress = false;
+	boardRef.remove();
+}
+
 function toggleTurn(){
     allowMove(false);
-    if(document.getElementById("a1").className === "bK"){
-        gameEnd("black");
-        return;
-    }else if(document.getElementById("d4").className === "wK"){
-        gameEnd("white");
-        return;
-    }
-    //isCheckMate()
     whiteTurn = !whiteTurn;
     blackTurn = !blackTurn;
     checkFrom = isCheck();
     getAttackedSquares();
+    if(document.getElementById("a1").className === "bK")
+        gameEnd("black");
+    else if(document.getElementById("d4").className === "wK")
+        gameEnd("white");
+    //isCheckMate()
     allowMove(true);
     if(whiteTurn)  
         console.log("white to move");
@@ -566,5 +581,6 @@ function startGame() {
                 return(id = ("d"+(i+1)+""));
         }
     }
+	gameInProgress = true;
 }
 document.addEventListener('DOMContentLoaded',init);

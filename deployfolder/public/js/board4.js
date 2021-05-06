@@ -15,7 +15,7 @@ function init(){
 	boardRefLast.on('child_added', (data) => {
 	var moveString = data.val().move;
 	console.log(moveString);
-	if((((yourColor==="white" && !whiteTurn)||(yourColor==="black" && whiteTurn))&&gameInProgress)){
+	if(((yourColor==="white" && !whiteTurn)||(yourColor==="black" && whiteTurn))&&gameInProgress){
 		var from = moveString.substring(0,2);
 		var to = moveString.substring(2,4);
 		document.getElementById(to).className = document.getElementById(from).className;

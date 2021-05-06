@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'/>
 	<link rel="stylesheet" href="css/lobby.css">
+	<link rel="stylesheet" href="css/dropdown.css">
 
 	<script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
     <script src="/__/firebase/8.3.3/firebase-auth.js"></script>
@@ -17,13 +18,21 @@
 	});
 	</script>
 </head>
-<body>	
+<body>
+			
+			
 	<div style="background-image: url('img/tree.gif');">
 			<div class="row">
 				<h1 class ="title">Gamm Coombat Lobby</h1>
-				<!--<h2><a href ="login.html" class= "quit">quit</a></h2>-->
-				<button id="profile-button" onclick="location.href='profilepage.html';" class="btn2">Update Profile</button>
-				<button id="logout-button" onclick="logout()" class="btn1">Logout</button>
+					<button id="logout-button" onclick="logout()" class="rage">Logout</button>
+
+				<div class="dropdown">
+					<button onclick="myFunction()" class="dropbtn">Options</button>
+					<div id="myDropdown" class="dropdown-content">
+					  <a href="rules.html">Rules</a>
+					  <a href="profilepage.html">update profile</a>
+					</div>
+				  </div>
 			</div>
 
 
@@ -32,8 +41,8 @@
 				<div class= "col-md-5 col-sm-5">
 					
 					<div class="card-body">
-						<p><a href ="rules.html" class= "servers">The Rules</a></p>
 						<h1 class="server-list">Servers</h1>
+						
 						<p><a href ="server1.html" class= "servers">Server 1</a></p>
 						<p><a href ="server2.html" class= "servers">Server 2</a></p>
 						<p><a href ="server3.html" class= "servers">Server 3</a></p>
@@ -70,6 +79,7 @@
 			</div>
 	</div>
 <script src="js/superChat.js"></script>
+<script src="js/dropdown.js"></script>
 <script src="js/logout.js"></script>
 <script src="js/checkUser.js"></script>
 <script src="js/getSecureApi.js"></script>

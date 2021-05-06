@@ -120,9 +120,10 @@ function allowMove(bool){
             R[index].setAttribute("onDragStart", "dragstart_handler(event)");
         }
         var B = chessBoard.getElementsByClassName("wB");
-        if(B[0] !== undefined)
+        if(B.length !== "0" && B[0] !== undefined){
             B[0].setAttribute("draggable",bool);
             B[0].setAttribute("onDragStart", "dragstart_handler(event)");
+        }
         var K = chessBoard.getElementsByClassName("wK");
         K[0].setAttribute("draggable",bool);
         K[0].setAttribute("onDragStart", "dragstart_handler(event)");
@@ -134,9 +135,10 @@ function allowMove(bool){
             R[index].setAttribute("onDragStart", "dragstart_handler(event)");
         }
         var B = chessBoard.getElementsByClassName("bB");
-        if(B[0] !== undefined)
+        if(B.length !== "0" && B[0] !== undefined){
             B[0].setAttribute("draggable",bool);
             B[0].setAttribute("onDragStart", "dragstart_handler(event)");
+        }
         var K = chessBoard.getElementsByClassName("bK");
         K[0].setAttribute("draggable",bool);
         K[0].setAttribute("onDragStart", "dragstart_handler(event)");

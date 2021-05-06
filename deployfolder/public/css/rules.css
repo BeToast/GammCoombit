@@ -19,6 +19,22 @@ body{
     border-radius: 20px;
 }
 
+.lob{
+    display: inline-block;
+    padding:10px;
+    border-radius: 20px;
+    font-size: medium;
+    background-color: #222a3d;
+    color: white;
+    margin: 15px 5px 0px 0px;
+    left: 1vw;
+    top: 1vh;
+    height: -100vh;
+    position: relative;
+    margin: auto;
+    box-sizing: border-box;
+  }
+
 .row{
     background: #2d3562;
     border-radius: 30px;

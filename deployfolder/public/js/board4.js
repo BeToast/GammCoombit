@@ -8,8 +8,8 @@ var gameInProgress = false;
 var forceEnd = false;
 
 const database = firebase.database();
-const boardRef = database.ref("/Board");
-const boardRefLast = database.ref("/Board").limitToLast(1);
+const boardRef = database.ref("/Board4");
+const boardRefLast = database.ref("/Board4").limitToLast(1);
 
 function init(){
 	boardRefLast.on('child_added', (data) => {

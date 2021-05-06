@@ -31,6 +31,11 @@ function sendMoveToServer(moveString){
     //TODO: call firebase function that runs recieveMoveFromServer(moveString) on other players client
 }
 
+function gameEnd(winner){
+    //TODO: call function here to clear the moves database
+    endMenu(winner);
+}
+
 function recieveMoveFromServer(moveString){
     var from = moveString.substring(0,2);
     var to = moveString.substring(2,4);
@@ -43,27 +48,21 @@ function recieveMoveFromServer(moveString){
     document.getElementById(from).className = "O";
     toggleTurn();
 }
-/*
-function recieveMoveTest(){
-    let string = document.getElementById(testmovestring).innerHTML;
-    recieveMoveFromServer(string);
-}
-*/
-function gameEnd(winner){
-    
-}
 
 function toggleTurn(){
     allowMove(false);
+    if(document.getElementById("a1").className === "bK"){
+        gameEnd("black");
+        return;
+    }else if(document.getElementById("d4").className === "wK"){
+        gameEnd("white");
+        return;
+    }
+    //isCheckMate()
     whiteTurn = !whiteTurn;
     blackTurn = !blackTurn;
     checkFrom = isCheck();
     getAttackedSquares();
-    if(document.getElementById("a1").className === "bK")
-        gameEnd("black");
-    else if(document.getElementById("d4").className === "wK")
-        gameEnd("white");
-    //isCheckMate()
     allowMove(true);
     if(whiteTurn)  
         console.log("white to move");

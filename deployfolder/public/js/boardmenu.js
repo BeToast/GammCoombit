@@ -1,5 +1,4 @@
 function colorMenu(){ //change the colorMenu buttons if you like.
-    var chessBoard = document.getElementById("chessBoard");
     var startmenu = document.getElementById("startmenu");
     startmenu.classList.add("btn-group-vertical");
     startmenu.innerHTML = `
@@ -32,13 +31,29 @@ function newMenu(){
     startmenu.id = "startmenu";
     //put menu on board
     chessBoard.appendChild(startmenu);
+}
+function endMenu(winner){
+    newMenu();
+    if(winner==="white"){
+        document.getElementById("startmenu").innerHTML = `
+        <div class='card bg-light'>
+            <div class='card-body'>WHITE wins!!<br>server will reset soon...</div>
+        </div>   
+        `;
+    } else if(winner==="black"){
+        document.getElementById("startmenu").innerHTML = `
+        <div class='card text-white bg-dark'>
+            <div class='card-body'>BLACK wins!!<br>server will reset soon...</div>
+        </div>
+        `;
+    }
+}
+window.onload = function(){
+    newMenu();
     if(yourColor){
         waitingMenu(yourColor);
     } else {
         colorMenu();
     }
-}
-window.onload = function(){
-    newMenu();
 };
 

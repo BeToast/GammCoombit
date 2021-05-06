@@ -5,7 +5,6 @@ var blackTurn = false;
 var checkFrom = "";
 var attackedSquares = [];
 var gameInProgress = false;
-var forceEnd = false;
 
 const database = firebase.database();
 const boardRef = database.ref("/Board4");

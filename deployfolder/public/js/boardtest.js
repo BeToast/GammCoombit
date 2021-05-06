@@ -6,11 +6,13 @@ var attackedSquares = [];
 var gameInProgress = false;
 
 const database = firebase.database();
-const boardRef = database.ref("/Board").limitToLast(1);
+const boardRef = database.ref("/Board");
+const boardRefLast = database.ref("/Board").limitToLast(1);
 
 function init(){
-	boardRef.on('child_added', (data) => {
+	boardRefLast.on('child_added', (data) => {
 	var moveString = data.val().move;
+	console.log(moveString);
 	if(((yourColor==="white" && !whiteTurn)||(yourColor==="black" && whiteTurn))&&gameInProgress){
 		
 		

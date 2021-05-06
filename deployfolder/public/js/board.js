@@ -34,7 +34,12 @@ function sendMoveToServer(moveString){
 function recieveMoveFromServer(moveString){
     var from = moveString.substring(0,2);
     var to = moveString.substring(2,4);
-    document.getElementById(to).className = document.getElementById(from).className;
+    var toEl = document.getElementById(to);
+    toEl.className = document.getElementById(from).className;
+    if(toEl.className !== "O"){
+        toEl.removeAttribute("draggable");
+        toEl.removeAttribute("onDragStart");
+    }
     document.getElementById(from).className = "O";
     toggleTurn();
 }

@@ -4,6 +4,10 @@ var blackTurn = false;
 var checkFrom = "";
 var attackedSquares = [];
 
+const database = firebase.database();
+const boardRef = database.ref("/Board");
+boardRef.on('child_added', recieveMoveFromServer());
+
 function joinWhite(){
     yourColor = "white";
     waitingMenu(yourColor);
@@ -29,14 +33,26 @@ function joinRandom(){
 function sendMoveToServer(moveString){
     console.log("movestring: "+moveString+"");
     //TODO: call firebase function that runs recieveMoveFromServer(moveString) on other players client
+	const move = moveString;
+	const newMove = {
+		move: move
+	};
+	boardRef.push(newMove);
 }
 
-function recieveMoveFromServer(moveString){
-    var from = moveString.substring(0,2);
-    var to = moveString.substring(2,4);
-    document.getElementById(to).className = document.getElementById(from).className;
-    document.getElementById(from).className = "O";
-    toggleTurn();
+function recieveMoveFromServer(){
+	var recentMove = firebase.database().ref('/Board').limitToLast(1);
+	console.log(recentMove);
+	/*if((yourColor==="white" && !whiteTurn)||(yourColor==="black" && whiteTurn)){
+		
+		
+		
+		var from = moveString.substring(0,2);
+		var to = moveString.substring(2,4);
+		document.getElementById(to).className = document.getElementById(from).className;
+		document.getElementById(from).className = "O";
+		toggleTurn();
+	}*/
 }
 /*
 function recieveMoveTest(){

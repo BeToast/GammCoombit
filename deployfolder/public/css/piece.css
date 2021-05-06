@@ -40,3 +40,18 @@
 {
     background-image: url("../img/moveable.png");
 }
+
+.menu
+{
+    display: inline-block;
+    position: relative;
+    top: 30px;
+    left: 5vw;
+    width: 40vw; 
+    height: 80vh;
+    outline:4px solid black;
+    padding-bottom: 10vw;
+    border-radius: 5px;
+    background-color: rgba(128, 128, 128, 0.486);
+    
+}

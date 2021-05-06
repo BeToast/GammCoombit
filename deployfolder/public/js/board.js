@@ -1,25 +1,65 @@
+var yourColor;
 var whiteTurn = true;
 var blackTurn = false;
 var checkFrom = "";
 var attackedSquares = [];
-//functions uphere will get called throughout the program
+
+function joinWhite(){
+    yourColor = "white";
+    waitingMenu(yourColor);
+    //TODO: we need to add yourEmail=yourColor to the firebase database for current game
+    //maybe store you are in a game with cookie so refresing doesnt end the game?
+}
+function joinBlack(){
+    yourColor = "black";
+    waitingMenu(yourColor);
+    //TODO: we need to add yourEmail=yourColor to the firebase database for current game
+}
+function joinRandom(){
+    var h = Math.random();
+    if(Math.random() < .5){
+        yourColor = "white";
+    } else {
+        yourColor = "black";
+    }
+    waitingMenu(yourColor);
+    //TODO: we need to add yourEmail=yourColor to the firebase database for current game
+}
+
+function sendMoveToServer(moveString){
+    console.log("movestring: "+moveString+"");
+    //TODO: call firebase function that runs recieveMoveFromServer(moveString) on other players client
+}
+
+function recieveMoveFromServer(moveString){
+    var from = moveString.substring(0,2);
+    var to = moveString.substring(2,4);
+    document.getElementById(to).className = document.getElementById(from).className;
+    document.getElementById(from).className = "O";
+    toggleTurn();
+}
+/*
+function recieveMoveTest(){
+    let string = document.getElementById(testmovestring).innerHTML;
+    recieveMoveFromServer(string);
+}
+*/
+function gameEnd(winner){
+    
+}
 
 function toggleTurn(){
+    allowMove(false);
     whiteTurn = !whiteTurn;
     blackTurn = !blackTurn;
-    var chessBoard = document.getElementById("chessBoard");
-    var el = new Array(16);
-    el = chessBoard.getElementsByTagName("span");
-    for(var i = 0; i <= 15; i++){
-        var piece = el[i].className;
-        if(piece === "wK"||piece === "wR"||piece === "wB"){
-            el[i].setAttribute("draggable", whiteTurn);
-        }else if(piece === "bK"||piece === "bR"||piece === "bB"){
-            el[i].setAttribute("draggable", blackTurn);
-        }
-    }
     checkFrom = isCheck();
     getAttackedSquares();
+    if(document.getElementById("a1").className === "bK")
+        gameEnd("black");
+    else if(document.getElementById("d4").className === "wK")
+        gameEnd("white");
+    //isCheckMate()
+    allowMove(true);
     if(whiteTurn)  
         console.log("white to move");
     else if(blackTurn)
@@ -32,7 +72,7 @@ function getAttackedSquares(){
     if(whiteTurn){
         var R = chessBoard.getElementsByClassName("bR");
         var B = chessBoard.getElementsByClassName("bB");
-    } else {
+    }else if(blackTurn) {
         var R = chessBoard.getElementsByClassName("wR");
         var B = chessBoard.getElementsByClassName("wB");
     }
@@ -71,11 +111,43 @@ function resetDroppable(){
     }
 }
 
+function allowMove(bool){
+    //if your white and white turn
+    if(whiteTurn && (yourColor === "white")){
+        var R = chessBoard.getElementsByClassName("wR");
+        for(var index = 0; index < R.length; index++) {
+            R[index].setAttribute("draggable",bool);
+            R[index].setAttribute("onDragStart", "dragstart_handler(event)");
+        }
+        var B = chessBoard.getElementsByClassName("wB");
+        if(B[0] !== undefined)
+            B[0].setAttribute("draggable",bool);
+            B[0].setAttribute("onDragStart", "dragstart_handler(event)");
+        var K = chessBoard.getElementsByClassName("wK");
+        K[0].setAttribute("draggable",bool);
+        K[0].setAttribute("onDragStart", "dragstart_handler(event)");
+    //if your black and black turn
+    }else if(blackTurn && (yourColor === "black")) {
+        var R = chessBoard.getElementsByClassName("bR");
+        for(var index = 0; index < R.length; index++) {
+            R[index].setAttribute("draggable",bool);
+            R[index].setAttribute("onDragStart", "dragstart_handler(event)");
+        }
+        var B = chessBoard.getElementsByClassName("bB");
+        if(B[0] !== undefined)
+            B[0].setAttribute("draggable",bool);
+            B[0].setAttribute("onDragStart", "dragstart_handler(event)");
+        var K = chessBoard.getElementsByClassName("bK");
+        K[0].setAttribute("draggable",bool);
+        K[0].setAttribute("onDragStart", "dragstart_handler(event)");
+    }
+}
+
 function isAttacked(square){
     if(whiteTurn && square.id === "d4"){
-        return false;
+        return true;
     } else if(blackTurn && square.id === "a1"){
-        return false;
+        return true;
     }
     for(var i = 0; i < attackedSquares.length; i++){
         if(square.id !== attackedSquares[i]){
@@ -87,18 +159,17 @@ function isAttacked(square){
 }
 
 function drop_handler(ev) {
-    resetDroppable();
-    ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
     var prev = document.getElementById(data);
-    ev.target.className = prev.className;
-    ev.target.setAttribute("draggable","true");
-    ev.target.setAttribute("onDragStart", "dragstart_handler(event)");
-    ev.target.setAttribute("ondragend", "dragend_handler()");
-    prev.className = "O";
     prev.removeAttribute("draggable");
     prev.removeAttribute("onDragStart");
     prev.removeAttribute("onDragEnd");
+    ev.preventDefault();
+    resetDroppable();
+    ev.target.className = prev.className;
+    ev.target.setAttribute("ondragend", "dragend_handler()");
+    prev.className = "O";
+    sendMoveToServer(""+data+ev.target.id+"");
     toggleTurn();
 }
 
@@ -127,7 +198,7 @@ function isCheck(){
     if(whiteTurn){
         var el = document.getElementsByClassName("wK");
         var checkColor = "b";
-    } else {
+    } else if(blackTurn){
         var el = document.getElementsByClassName("bK");
         var checkColor = "w";
     }
@@ -399,10 +470,12 @@ function getPossibleMoves(id, piece){
         }
     }
 }
+function isCheckMate(checkFrom){
+    //TODO: bruh noone ever checkmates this isint worth it. You can always just resign/leave if you get checkmated.
+}
 
-window.onload = function() {
-    //I added this shit in the onload cuz it only makes sense.
-    //create 2d array to be the boardState
+function startGame() {
+    document.getElementById("startmenu").remove();
     var defaultBoard = new Array(4);
     for(var i = 0; i < 4; i++){
         defaultBoard[i] = new Array(4);
@@ -434,10 +507,10 @@ window.onload = function() {
         var tempClass = defaultBoard[i][j];
         square.className = tempClass;
         if(tempClass==="wR"||tempClass==="bR"||tempClass==="wK"||tempClass==="bK"||tempClass==="wB"||tempClass==="bB"){
-            if(tempClass==="wR"||tempClass==="wK"||tempClass==="wB"){
+            if((yourColor==="white") && (tempClass==="wR"||tempClass==="wK"||tempClass==="wB")){
                 square.setAttribute("draggable", "true");
+                square.setAttribute("onDragStart", "dragstart_handler(event)");
             }
-            square.setAttribute("onDragStart", "dragstart_handler(event)");
             square.setAttribute("ondragend", "dragend_handler()");
         }else{
             square.className = "O";

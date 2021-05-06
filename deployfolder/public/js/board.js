@@ -333,7 +333,7 @@ function getPossibleMoves(id, piece){
             case "K":
                 if((colVal-1) >= 97){
                     var target = document.getElementById(String.fromCharCode(colVal-1)+rowVal);
-                    if(target.className !== "wR" || target.className !== "bR"){
+                    if(target.className !== "wR" && target.className !== "bR" && target.className !== "wK" && target.className !== "bK"){
                         if(isAttacked(target)){
                             makeDropabble(target,pieceColor);
                         }
@@ -341,7 +341,7 @@ function getPossibleMoves(id, piece){
                 }
                 if((colVal+1) <= 100){
                     var target = document.getElementById(String.fromCharCode(colVal+1)+rowVal);
-                    if(target.className !== "wR" || target.className !== "bR"){
+                    if(target.className !== "wR" && target.className !== "bR" && target.className !== "wK" && target.className !== "bK"){
                         if(isAttacked(target)){
                             makeDropabble(target,pieceColor);
                         }
@@ -349,7 +349,7 @@ function getPossibleMoves(id, piece){
                 }
                 if((rowVal-1) >= 1){
                     var target = document.getElementById(String.fromCharCode(colVal)+(rowVal-1));
-                    if(target.className !== "wR" || target.className !== "bR"){
+                    if(target.className !== "wR" && target.className !== "bR" && target.className !== "wK" && target.className !== "bK"){
                         if(isAttacked(target)){
                             makeDropabble(target,pieceColor);
                         }
@@ -357,7 +357,7 @@ function getPossibleMoves(id, piece){
                 }
                 if((rowVal+1) <= 4){
                     var target = document.getElementById(String.fromCharCode(colVal)+(rowVal+1));
-                    if(target.className !== "wR" || target.className !== "bR"){
+                    if(target.className !== "wR" && target.className !== "bR" && target.className !== "wK" && target.className !== "bK"){
                         if(isAttacked(target)){
                             makeDropabble(target,pieceColor);
                         }
@@ -365,7 +365,7 @@ function getPossibleMoves(id, piece){
                 }
                 if((colVal-1) >= 97 && (rowVal-1) >= 1){
                     var target = document.getElementById(String.fromCharCode(colVal-1)+(rowVal-1));
-                    if(target.className !== "wB" || target.className !== "bB"){
+                    if(target.className !== "wB" && target.className !== "bB" && target.className !== "wK" && target.className !== "bK"){
                         if(isAttacked(target)){
                             makeDropabble(target,pieceColor);
                         }
@@ -373,7 +373,7 @@ function getPossibleMoves(id, piece){
                 }
                 if((colVal-1) >= 97 && (rowVal+1) <= 4){
                     var target = document.getElementById(String.fromCharCode(colVal-1)+(rowVal+1));
-                    if(target.className !== "wB" || target.className !== "bB"){
+                    if(target.className !== "wB" && target.className !== "bB" && target.className !== "wK" && target.className !== "bK"){
                         if(isAttacked(target)){
                             makeDropabble(target,pieceColor);
                         }
@@ -381,7 +381,7 @@ function getPossibleMoves(id, piece){
                 }
                 if((colVal+1) <= 100 && (rowVal-1) >= 1){
                     var target = document.getElementById(String.fromCharCode(colVal+1)+(rowVal-1));
-                    if(target.className !== "wB" || target.className !== "bB"){
+                    if(target.className !== "wB" && target.className !== "bB" && target.className !== "wK" && target.className !== "bK"){
                         if(isAttacked(target)){
                             makeDropabble(target,pieceColor);
                         }
@@ -389,7 +389,7 @@ function getPossibleMoves(id, piece){
                 }
                 if((colVal+1) <= 100 && (rowVal+1) <= 4){
                     var target = document.getElementById(String.fromCharCode(colVal+1)+(rowVal+1));
-                    if(target.className !== "wB" || target.className !== "bB"){
+                    if(target.className !== "wB" && target.className !== "bB" && target.className !== "wK" && target.className !== "bK"){
                         if(isAttacked(target)){
                             makeDropabble(target,pieceColor);
                         }
@@ -424,7 +424,7 @@ function getPossibleMoves(id, piece){
             case "K":
                 if((colVal-1) >= 97){
                     var target = document.getElementById(String.fromCharCode(colVal-1)+rowVal);
-                    if(target.className.charAt(1) !== "R"){
+                    if(target.className.charAt(1) !== "R" && target.className.charAt(1) !== "K"){
                         if(isAttacked(target)){
                             makeDropabble(target,pieceColor);
                         }
@@ -432,7 +432,7 @@ function getPossibleMoves(id, piece){
                 }
                 if((colVal+1) <= 100){
                     var target = document.getElementById(String.fromCharCode(colVal+1)+rowVal);
-                    if(target.className.charAt(1) !== "R"){
+                    if(target.className.charAt(1) !== "R" && target.className.charAt(1) !== "K"){
                         if(isAttacked(target)){
                             makeDropabble(target,pieceColor);
                         }
@@ -440,7 +440,7 @@ function getPossibleMoves(id, piece){
                 }
                 if((rowVal-1) >= 1){
                     var target = document.getElementById(String.fromCharCode(colVal)+(rowVal-1));
-                    if(target.className.charAt(1) !== "R"){
+                    if(target.className.charAt(1) !== "R" && target.className.charAt(1) !== "K"){
                         if(isAttacked(target)){
                             makeDropabble(target,pieceColor);
                         }
@@ -448,7 +448,7 @@ function getPossibleMoves(id, piece){
                 }
                 if((rowVal+1) <= 4){
                     var target = document.getElementById(String.fromCharCode(colVal)+(rowVal+1));
-                    if(target.className.charAt(1) !== "R"){
+                    if(target.className.charAt(1) !== "R" && target.className.charAt(1) !== "K"){
                         if(isAttacked(target)){
                             makeDropabble(target,pieceColor);
                         }
@@ -456,7 +456,7 @@ function getPossibleMoves(id, piece){
                 }
                 if((colVal-1) >= 97 && (rowVal-1) >= 1){
                     var target = document.getElementById(String.fromCharCode(colVal-1)+(rowVal-1));
-                    if(target.className.charAt(1) !== "B"){
+                    if(target.className.charAt(1) !== "B" && target.className.charAt(1) !== "K"){
                         if(isAttacked(target)){
                             makeDropabble(target,pieceColor);
                         }
@@ -464,7 +464,7 @@ function getPossibleMoves(id, piece){
                 }
                 if((colVal-1) >= 97 && (rowVal+1) <= 4){
                     var target = document.getElementById(String.fromCharCode(colVal-1)+(rowVal+1));
-                    if(target.className.charAt(1) !== "B"){
+                    if(target.className.charAt(1) !== "B" && target.className.charAt(1) !== "K"){
                         if(isAttacked(target)){
                             makeDropabble(target,pieceColor);
                         }
@@ -472,7 +472,7 @@ function getPossibleMoves(id, piece){
                 }
                 if((colVal+1) <= 100 && (rowVal-1) >= 1){
                     var target = document.getElementById(String.fromCharCode(colVal+1)+(rowVal-1));
-                    if(target.className.charAt(1) !== "B"){
+                    if(target.className.charAt(1) !== "B" && target.className.charAt(1) !== "K"){
                         if(isAttacked(target)){
                             makeDropabble(target,pieceColor);
                         }
@@ -480,7 +480,7 @@ function getPossibleMoves(id, piece){
                 }
                 if((colVal+1) <= 100 && (rowVal+1) <= 4){
                     var target = document.getElementById(String.fromCharCode(colVal+1)+(rowVal+1));
-                    if(target.className.charAt(1) !== "B"){
+                    if(target.className.charAt(1) !== "B" && target.className.charAt(1) !== "K"){
                         if(isAttacked(target)){
                             makeDropabble(target,pieceColor);
                         }

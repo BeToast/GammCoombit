@@ -3,11 +3,29 @@ var whiteTurn = true;
 var blackTurn = false;
 var checkFrom = "";
 var attackedSquares = [];
+var gameInProgress = false;
 
 const database = firebase.database();
 const boardRef = database.ref("/Board");
-boardRef.on('child_added', recieveMoveFromServer());
+const boardRefLast = database.ref("/Board").limitToLast(1);
 
+function init(){
+	boardRefLast.on('child_added', (data) => {
+	var moveString = data.val().move;
+	console.log(moveString);
+	if(((yourColor==="white" && !whiteTurn)||(yourColor==="black" && whiteTurn))&&gameInProgress){
+		
+		
+		
+		var from = moveString.substring(0,2);
+		var to = moveString.substring(2,4);
+		document.getElementById(to).className = document.getElementById(from).className;
+		document.getElementById(from).className = "O";
+		toggleTurn();
+	}
+});
+}
+	
 function joinWhite(){
     yourColor = "white";
     waitingMenu(yourColor);
@@ -40,8 +58,8 @@ function sendMoveToServer(moveString){
 	boardRef.push(newMove);
 }
 
-function recieveMoveFromServer(){
-	var recentMove = firebase.database().ref('/Board').limitToLast(1);
+function recieveMoveFromServer(data){
+	var recentMove = data.val().move.limitToLast(1);
 	console.log(recentMove);
 	/*if((yourColor==="white" && !whiteTurn)||(yourColor==="black" && whiteTurn)){
 		
@@ -61,7 +79,7 @@ function recieveMoveTest(){
 }
 */
 function gameEnd(winner){
-    
+    gameInProgress = false;
 }
 
 function toggleTurn(){
@@ -549,4 +567,6 @@ function startGame() {
                 return(id = ("d"+(i+1)+""));
         }
     }
+	gameInProgress = true;
 }
+document.addEventListener('DOMContentLoaded',init);

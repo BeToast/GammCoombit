@@ -33,12 +33,14 @@ function joinWhite(){
     waitingMenu(yourColor);
     //TODO: we need to add yourEmail=yourColor to the firebase database for current game
     //maybe store you are in a game with cookie so refresing doesnt end the game?
+	startGame();
 }
 function joinBlack(){
     yourColor = "black";
     opponentColor = "white";
     waitingMenu(yourColor);
     //TODO: we need to add yourEmail=yourColor to the firebase database for current game
+	startGame();
 }
 function joinRandom(){
     var h = Math.random();
@@ -51,6 +53,7 @@ function joinRandom(){
     }
     waitingMenu(yourColor);
     //TODO: we need to add yourEmail=yourColor to the firebase database for current game
+	startGame();
 }
 
 function sendMoveToServer(moveString){
@@ -93,6 +96,7 @@ function forceGameEnd(){
 
 function gameEnd(winner){
     gameInProgress = false;
+	boardRef.remove();
 }
 
 function toggleTurn(){

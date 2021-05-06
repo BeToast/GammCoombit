@@ -5,6 +5,7 @@ var blackTurn = false;
 var checkFrom = "";
 var attackedSquares = [];
 var gameInProgress = false;
+var forceEnd = false;
 
 const database = firebase.database();
 const boardRef = database.ref("/Board");
@@ -14,7 +15,7 @@ function init(){
 	boardRefLast.on('child_added', (data) => {
 	var moveString = data.val().move;
 	console.log(moveString);
-	if(((yourColor==="white" && !whiteTurn)||(yourColor==="black" && whiteTurn))&&gameInProgress){
+	if((((yourColor==="white" && !whiteTurn)||(yourColor==="black" && whiteTurn))&&gameInProgress)){
 		var from = moveString.substring(0,2);
 		var to = moveString.substring(2,4);
 		document.getElementById(to).className = document.getElementById(from).className;
@@ -30,12 +31,14 @@ function joinWhite(){
     waitingMenu(yourColor);
     //TODO: we need to add yourEmail=yourColor to the firebase database for current game
     //maybe store you are in a game with cookie so refresing doesnt end the game?
+	startGame();
 }
 function joinBlack(){
     yourColor = "black";
     opponentColor = "white";
     waitingMenu(yourColor);
     //TODO: we need to add yourEmail=yourColor to the firebase database for current game
+	startGame();
 }
 function joinRandom(){
     var h = Math.random();
@@ -48,6 +51,7 @@ function joinRandom(){
     }
     waitingMenu(yourColor);
     //TODO: we need to add yourEmail=yourColor to the firebase database for current game
+	startGame();
 }
 
 function sendMoveToServer(moveString){
@@ -57,11 +61,14 @@ function sendMoveToServer(moveString){
 	const newMove = {
 		move: move
 	};
+	forceEnd = true;
 	boardRef.push(newMove);
 }
 
 function gameEnd(winner){
     //TODO: call function here to clear the moves database
+	gameInProgress = false;
+	boardRef.remove();
     endMenu(winner);
 }
 

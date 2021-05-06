@@ -3,6 +3,28 @@ var whiteTurn = true;
 var blackTurn = false;
 var checkFrom = "";
 var attackedSquares = [];
+var gameInProgress = false;
+
+const database = firebase.database();
+const boardRef = database.ref("/Board");
+const boardRefLast = database.ref("/Board").limitToLast(1);
+
+function init(){
+	boardRefLast.on('child_added', (data) => {
+	var moveString = data.val().move;
+	console.log(moveString);
+	if(((yourColor==="white" && !whiteTurn)||(yourColor==="black" && whiteTurn))&&gameInProgress){
+		
+		
+		
+		var from = moveString.substring(0,2);
+		var to = moveString.substring(2,4);
+		document.getElementById(to).className = document.getElementById(from).className;
+		document.getElementById(from).className = "O";
+		toggleTurn();
+	}
+});
+}
 
 function joinWhite(){
     yourColor = "white";
@@ -29,24 +51,16 @@ function joinRandom(){
 function sendMoveToServer(moveString){
     console.log("movestring: "+moveString+"");
     //TODO: call firebase function that runs recieveMoveFromServer(moveString) on other players client
+	const move = moveString;
+	const newMove = {
+		move: move
+	};
+	boardRef.push(newMove);
 }
 
 function gameEnd(winner){
     //TODO: call function here to clear the moves database
     endMenu(winner);
-}
-
-function recieveMoveFromServer(moveString){
-    var from = moveString.substring(0,2);
-    var to = moveString.substring(2,4);
-    var toEl = document.getElementById(to);
-    toEl.className = document.getElementById(from).className;
-    if(toEl.className !== "O"){
-        toEl.removeAttribute("draggable");
-        toEl.removeAttribute("onDragStart");
-    }
-    document.getElementById(from).className = "O";
-    toggleTurn();
 }
 
 function toggleTurn(){
@@ -538,3 +552,4 @@ function startGame() {
         }
     }
 }
+document.addEventListener('DOMContentLoaded',init);

@@ -23,6 +23,15 @@ function init(){
 	}
 });
 }
+
+function sendMoveToServer(moveString){
+    console.log("movestring: "+moveString+"");
+	const move = moveString;
+	const newMove = {
+		move: move
+	};
+	boardRef.push(newMove);
+}
 	
 function joinWhite(){
     yourColor = "white";
@@ -51,16 +60,6 @@ function joinRandom(){
     waitingMenu(yourColor);
     //TODO: we need to add yourEmail=yourColor to the firebase database for current game
 	startGame();
-}
-
-function sendMoveToServer(moveString){
-    console.log("movestring: "+moveString+"");
-    //TODO: call firebase function that runs recieveMoveFromServer(moveString) on other players client
-	const move = moveString;
-	const newMove = {
-		move: move
-	};
-	boardRef.push(newMove);
 }
 
 function recieveMoveFromServer(data){

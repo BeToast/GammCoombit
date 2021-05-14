@@ -8,11 +8,11 @@
     appId: "1:831553997906:web:84333aedfbf82e1d1f238b"
   });
   let email = "";
-  let name = "";
+  let username = "";
   firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {	
 			email = user.email;
-			name = user.displayName;
+			username = user.displayName;
 		} else {
 			
 		}
@@ -30,10 +30,10 @@
       msgRef.on('child_added', updateMsgs);
   }
   const updateMsgs = data => {
-    const {email:userEmail,name, text} = data.val();
+    const {email:userEmail,username, text} = data.val();
     var outputText = text;
     const msg = `<li class="${email == userEmail ? "msg my": "msg"}"><span class = "msg-span">
-      <i class = "name">${name}: </i>${outputText}
+      <i class = "username">${username}: </i>${outputText}
       </span>
     </li>`
     msgScreen.innerHTML += msg;
@@ -46,11 +46,15 @@
       if(!text.trim()) return;
         const msg = {
 		  email,
-		  name,
+		  username,
           text: text
       };
       msgRef.push(msg);
       msgInput.value = "";
+  }
+
+  function getUserName(){
+    return username;
   }
   document.addEventListener('DOMContentLoaded',init);
 

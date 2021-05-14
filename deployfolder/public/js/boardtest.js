@@ -10,18 +10,28 @@ const database = firebase.database();
 const boardRef = database.ref("/Board");
 const boardRefLast = database.ref("/Board").limitToLast(1);
 
-function init(){
+function recieveMoveFromServer(){
 	boardRefLast.on('child_added', (data) => {
-	var moveString = data.val().move;
-	console.log(moveString);
-	if(((yourColor==="white" && !whiteTurn)||(yourColor==="black" && whiteTurn))&&gameInProgress){
-	    var from = moveString.substring(0,2);
-		var to = moveString.substring(2,4);
-		document.getElementById(to).className = document.getElementById(from).className;
-		document.getElementById(from).className = "O";
-		toggleTurn();
-	}
-});
+        var moveString = data.val().move;
+        console.log(moveString);
+        if(((yourColor==="white" && !whiteTurn)||(yourColor==="black" && whiteTurn))&&gameInProgress){
+            var from = moveString.substring(0,2);
+            var to = moveString.substring(2,4);
+            document.getElementById(to).className = document.getElementById(from).className;
+            document.getElementById(from).className = "OO";
+            toggleTurn();
+        }
+    });
+}
+
+function sendMoveToServer(moveString){
+    console.log("movestring: "+moveString+"");
+    //TODO: call firebase function that runs recieveMoveFromServer(moveString) on other players client
+	const move = moveString;
+	const newMove = {
+		move: move
+	};
+	boardRef.push(newMove);
 }
 	
 function joinWhite(){
@@ -53,36 +63,6 @@ function joinRandom(){
 	startGame();
 }
 
-function sendMoveToServer(moveString){
-    console.log("movestring: "+moveString+"");
-    //TODO: call firebase function that runs recieveMoveFromServer(moveString) on other players client
-	const move = moveString;
-	const newMove = {
-		move: move
-	};
-	boardRef.push(newMove);
-}
-
-function recieveMoveFromServer(data){
-	var recentMove = data.val().move.limitToLast(1);
-	console.log(recentMove);
-	/*if((yourColor==="white" && !whiteTurn)||(yourColor==="black" && whiteTurn)){
-		
-		
-		
-		var from = moveString.substring(0,2);
-		var to = moveString.substring(2,4);
-		document.getElementById(to).className = document.getElementById(from).className;
-		document.getElementById(from).className = "O";
-		toggleTurn();
-	}*/
-}
-/*
-function recieveMoveTest(){
-    let string = document.getElementById(testmovestring).innerHTML;
-    recieveMoveFromServer(string);
-}
-*/
 function forceGameEnd(){
     if(opponentColor==="white"){
         sendMoveToServer(""+document.getElementsByClassName("wK")[0].id+"d4");
@@ -218,7 +198,7 @@ function drop_handler(ev) {
     resetDroppable();
     ev.target.className = prev.className;
     ev.target.setAttribute("ondragend", "dragend_handler()");
-    prev.className = "O";
+    prev.className = "OO";
     sendMoveToServer(""+data+ev.target.id+"");
     toggleTurn();
 }
@@ -325,25 +305,25 @@ function getPossibleMoves(id, piece){
             case "B":
                 if((colVal-1) >= 97){
                     var target = document.getElementById(String.fromCharCode(colVal-1)+rowVal);
-                    if(target.className === "O"){
+                    if(target.className === "OO"){
                         makeDropabble(target,pieceColor);
                     }
                 }
                 if((colVal+1) <= 100){
                     var target = document.getElementById(String.fromCharCode(colVal+1)+rowVal);
-                    if(target.className === "O"){
+                    if(target.className === "OO"){
                         makeDropabble(target,pieceColor);
                     }
                 }
                 if((rowVal-1) >= 1){
                     var target = document.getElementById(String.fromCharCode(colVal)+(rowVal-1));
-                    if(target.className === "O"){
+                    if(target.className === "OO"){
                         makeDropabble(target,pieceColor);
                     }
                 }
                 if((rowVal+1) <= 4){
                     var target = document.getElementById(String.fromCharCode(colVal)+(rowVal+1));
-                    if(target.className === "O"){
+                    if(target.className === "OO"){
                         makeDropabble(target,pieceColor);
                     }
                 }
@@ -532,18 +512,18 @@ function startGame() {
     }
     defaultBoard[0][0] = "wK";
     defaultBoard[0][1] = "wR";
-    defaultBoard[0][2] = "O";
-    defaultBoard[0][3] = "O";
+    defaultBoard[0][2] = "OO";
+    defaultBoard[0][3] = "OO";
     defaultBoard[1][0] = "wR";
     defaultBoard[1][1] = "wB";
-    defaultBoard[1][2] = "O";
-    defaultBoard[1][3] = "O";
-    defaultBoard[2][0] = "O";
-    defaultBoard[2][1] = "O";
+    defaultBoard[1][2] = "OO";
+    defaultBoard[1][3] = "OO";
+    defaultBoard[2][0] = "OO";
+    defaultBoard[2][1] = "OO";
     defaultBoard[2][2] = "bB";
     defaultBoard[2][3] = "bR";
-    defaultBoard[3][0] = "O";
-    defaultBoard[3][1] = "O";
+    defaultBoard[3][0] = "OO";
+    defaultBoard[3][1] = "OO";
     defaultBoard[3][2] = "bR";
     defaultBoard[3][3] = "bK";
 
@@ -563,7 +543,7 @@ function startGame() {
             }
             square.setAttribute("ondragend", "dragend_handler()");
         }else{
-            square.className = "O";
+            square.className = "OO";
         }
         row.appendChild(square);
         }
@@ -583,4 +563,4 @@ function startGame() {
     }
 	gameInProgress = true;
 }
-document.addEventListener('DOMContentLoaded',init);
+document.addEventListener('DOMContentLoaded',recieveMoveFromServer);

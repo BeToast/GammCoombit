@@ -48,6 +48,7 @@ function endMenu(winner){
         `;
     }
 }
+/*
 window.onload = function(){
     newMenu();
     if(yourColor){
@@ -56,4 +57,5 @@ window.onload = function(){
         colorMenu();
     }
 };
+*/
 

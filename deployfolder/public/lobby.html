@@ -29,23 +29,94 @@
 					  <a href="rules.html">Rules</a>
 					  <a href="profilepage.html">update profile</a>
 					</div>
-				  </div>
-			</div>
-
+				</div>
+            </div>
 			<div class="row">
 				<div class= "col-md-5 col-sm-5">
-					<div class="card-body">
-						<h1 class="server-list">Servers</h1>
-						
-						<p><a href ="server1.html" class= "servers">Server 1</a><w class= "noOfPl">0/2</w></p>
-						<p><a href ="server2.html" class= "servers">Server 2</a><w class= "noOfPl">0/2</w></p>
-						<p><a href ="server3.html" class= "servers">Server 3</a><w class= "noOfPl">0/2</w></p>
-						<p><a href ="server4.html" class= "servers">Server 4</a><w class= "noOfPl">0/2</w></p>
-						<p><a href ="server5.html" class= "servers">Server 5</a><w class= "noOfPl">0/2</w></p>
-						<p><a href ="servertest.html" class= "servers">testboarddatabase</a></p>
+                    <br>
+					<div class="container">
+                        <div id="lobbyalert" class="row"><br></div>
+                        <div class="row">
+                            <div class="col-2">
+                                <div class="card bg-secondary text-center">
+                                  <div class="card-body">
+                                      <h3 style="color: white">1</h3>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="btn-group btn-group col-10">
+                                <button onclick="joingame(1,'white')" class="btn btn-light btn-lg" type="button" id="white1"> Join White </button>
+                                <button onclick="joingame(1,'black')" class="btn btn-dark btn-lg" type="button" id="black1"> Join Black </button>         
+                                <button onclick="joingame(1,null)" class="btn btn-secondary btn-lg" type="button"> Spectate </button>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-2">
+                                <div class="card bg-secondary text-center">
+                                  <div class="card-body">
+                                      <h3 style="color: white">2</h3>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="btn-group btn-group col-10">
+                                <button onclick="joingame(2,'white')" class="btn btn-light btn-lg" type="button" id="white2"> Join White </button>
+                                <button onclick="joingame(2,'black')" class="btn btn-dark btn-lg" type="button" id="black2"> Join Black </button>         
+                                <button onclick="joingame(2,null)" class="btn btn-secondary btn-lg" type="button"> Spectate </button>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-2">
+                                <div class="card bg-secondary text-center">
+                                  <div class="card-body">
+                                      <h3 style="color: white">3</h3>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="btn-group btn-group col-10">
+                                <button onclick="joingame(3,'white')" class="btn btn-light btn-lg" type="button" id="white3"> Join White </button>
+                                <button onclick="joingame(3,'black')" class="btn btn-dark btn-lg" type="button" id="black3"> Join Black </button>         
+                                <button onclick="joingame(3,null)" class="btn btn-secondary btn-lg" type="button"> Spectate </button>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-2">
+                                <div class="card bg-secondary text-center">
+                                  <div class="card-body">
+                                      <h3 style="color: white">4</h3>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="btn-group btn-group col-10">
+                                <button onclick="joingame(4,'white')" class="btn btn-light btn-lg" type="button" id="white4"> Join White </button>
+                                <button onclick="joingame(4,'black')" class="btn btn-dark btn-lg" type="button" id="black4"> Join Black </button>         
+                                <button onclick="joingame(4,null)" class="btn btn-secondary btn-lg" type="button"> Spectate </button>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-2">
+                                <div class="card bg-secondary text-center">
+                                  <div class="card-body">
+                                      <h3 style="color: white">5</h3>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="btn-group btn-group col-10">
+                                <button onclick="joingame(5,'white')" class="btn btn-light btn-lg" type="button" id="white5"> Join White </button>
+                                <button onclick="joingame(5,'black')" class="btn btn-dark btn-lg" type="button" id="black5"> Join Black </button>         
+                                <button onclick="joingame(5,null)" class="btn btn-secondary btn-lg" type="button"> Spectate </button>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row mx-auto">
+                            <a class="btn btn-secondary" href="serverlocal.html" role="button">local board</a>
+                        </div>
+                        <br>
 					</div>
 				</div>
-
 				<div class= "col-md-5 col-sm-5">
 				<div class = "chat">
 					<div class = "chat-window" id = "chat-window">
@@ -77,6 +148,7 @@
 <script src="js/dropdown.js"></script>
 <script src="js/logout.js"></script>
 <script src="js/checkUser.js"></script>
+<script src="js/lobbyServers.js"></script>
 <script src="js/getSecureApi.js"></script>
 
 </body>

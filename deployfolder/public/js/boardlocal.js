@@ -6,133 +6,9 @@ var checkFrom = "";
 var attackedSquares = [];
 var gameInProgress = false;
 
-const database = firebase.database();
-const server1white = database.ref("/lobbybase/server1/white");
-const server1black = database.ref("/lobbybase/server1/black");
-const boardstring = database.ref("/lobbybase/server1/board")
-const boardRef = database.ref("/Board1");
-const boardRefLast = database.ref("/Board1").limitToLast(1);
-
-server1white.on("value", (data) => {
-    var rat = document.getElementById("whiteplayer");
-    if(data.val() === ""){
-        rat.innerHTML = "Waiting for white player...";
-    }else{
-        rat.innerHTML = "@"+data.val();
-    }
-    if(data.val()!=="" && document.getElementById("blackplayer").innerHTML !== "Waiting for black player..."){
-        startGame();
-    }
-});
-server1black.on("value", (data) => {
-    var rat = document.getElementById("blackplayer");
-    if(data.val() === ""){
-        rat.innerHTML = "Waiting for black player...";
-    }else{
-        rat.innerHTML = "@"+data.val();
-    }
-    if(data.val()!=="" && document.getElementById("blackplayer").innerHTML !== "Waiting for white player..."){
-        startGame();
-    }
-});
-
-function sendMoveToServer(moveString){
-    console.log("movestring: "+moveString+"");
-    //TODO: call firebase function that runs recieveMoveFromServer(moveString) on other players client
-	const move = moveString;
-	const newMove = {
-		move: move
-	};
-	boardRef.push(newMove);
-    sendBoard();
-}
-
-function recieveMoveFromServer(){
-	boardRefLast.on('child_added', (data) => {
-        var moveString = data.val().move;
-        console.log(moveString);
-        if(((yourColor === "spec")||(yourColor==="white" && blackTurn)||(yourColor==="black" && whiteTurn))&&gameInProgress){
-            var from = moveString.substring(0,2);
-            var to = moveString.substring(2,4);
-            document.getElementById(to).className = document.getElementById(from).className;
-            document.getElementById(from).className = "OO";
-            toggleTurn();
-        }
-    });
-}
-
-function startGame(){
-    if(document.getElementById("whiteplayer").innerHTML==="@"+getUserName())
-        yourColor="white";
-    else if(document.getElementById("blackplayer").innerHTML==="@"+getUserName())
-        yourColor="black";
-    allowMove();
-}
-
-function sendBoard(){
-    var string = ""
-    for(var j=3; j>=0; j--){
-        for(var i=1; i<=4; i++){
-            string+=document.getElementById(generateId(i,j)).className;
-        }
-    }
-    if(whiteTurn)
-        string+='WW';
-    else if(blackTurn)
-        string+='BB';
-    boardstring.set(string);
-}
-
-/*	
-function joinWhite(){
-    yourColor = "white";
-    opponentColor = "black";
-    waitingMenu(yourColor);
-    //TODO: we need to add yourEmail=yourColor to the firebase database for current game
-    //maybe store you are in a game with cookie so refresing doesnt end the game?
-	startGame();
-}
-function joinBlack(){
-    yourColor = "black";
-    opponentColor = "white";
-    waitingMenu(yourColor);
-    //TODO: we need to add yourEmail=yourColor to the firebase database for current game
-	startGame();
-}
-function joinRandom(){
-    var h = Math.random();
-    if(Math.random() < .5){
-        yourColor = "white";
-        opponentColor = "black";
-    } else {
-        yourColor = "black";
-        opponentColor = "white";
-    }
-    waitingMenu(yourColor);
-    //TODO: we need to add yourEmail=yourColor to the firebase database for current game
-	startGame();
-}
-*/
-
-function forceGameEnd(){
-    if(opponentColor==="white"){
-        sendMoveToServer(""+document.getElementsByClassName("wK")[0].id+"d4");
-    }else if(opponentColor==="black"){
-        sendMoveToServer(""+document.getElementsByClassName("bK")[0].id+"a1");
-    }
-}
-
 function gameEnd(winner){
     gameInProgress = false;
     endMenu(winner);
-    setTimeout(() => {
-        boardRef.remove();
-        boardstring.set("OOOObRbKOOOObBbRwRwBOOOOwKwROOOOWW");
-        server1white.set("");
-        server1black.set("");
-        window.location.href = "lobby.html";
-    },5000);
-	
 }
 
 function toggleTurn(){
@@ -148,9 +24,9 @@ function toggleTurn(){
     //isCheckMate()
     allowMove(true);
     if(whiteTurn)  
-        document.getElementById("moveinfo").innerHTML = "White to move.";
+        console.log("white to move");
     else if(blackTurn)
-        document.getElementById("moveinfo").innerHTML = "Black to move.";
+        console.log("black to move");
 }
 
 function getAttackedSquares(){
@@ -200,7 +76,7 @@ function resetDroppable(){
 
 function allowMove(bool){
     //if your white and white turn
-    if(whiteTurn && (yourColor === "white")){
+    if(whiteTurn){
         var R = chessBoard.getElementsByClassName("wR");
         for(var index = 0; index < R.length; index++) {
             R[index].setAttribute("draggable",bool);
@@ -215,7 +91,7 @@ function allowMove(bool){
         K[0].setAttribute("draggable",bool);
         K[0].setAttribute("onDragStart", "dragstart_handler(event)");
     //if your black and black turn
-    }else if(blackTurn && (yourColor === "black")) {
+    }else if(blackTurn) {
         var R = chessBoard.getElementsByClassName("bR");
         for(var index = 0; index < R.length; index++) {
             R[index].setAttribute("draggable",bool);
@@ -258,7 +134,6 @@ function drop_handler(ev) {
     ev.target.className = prev.className;
     ev.target.setAttribute("ondragend", "dragend_handler()");
     prev.className = "OO";
-    sendMoveToServer(""+data+ev.target.id+"");
     toggleTurn();
 }
 
@@ -563,44 +438,59 @@ function isCheckMate(checkFrom){
     //TODO: bruh noone ever checkmates this isint worth it. You can always just resign/leave if you get checkmated.
 }
 
-function generateId (i, j) {
-    var id = "";
-    switch(j) {
-        case 0:
-            return(id = ("a"+(i)+""));
-        case 1:
-            return(id = ("b"+(i)+""));
-        case 2:
-            return(id = ("c"+(i)+""));
-        case 3:
-            return(id = ("d"+(i)+""));
+window.onload = function startGame() {
+    var defaultBoard = new Array(4);
+    for(var i = 0; i < 4; i++){
+        defaultBoard[i] = new Array(4);
     }
-}
+    defaultBoard[0][0] = "wK";
+    defaultBoard[0][1] = "wR";
+    defaultBoard[0][2] = "OO";
+    defaultBoard[0][3] = "OO";
+    defaultBoard[1][0] = "wR";
+    defaultBoard[1][1] = "wB";
+    defaultBoard[1][2] = "OO";
+    defaultBoard[1][3] = "OO";
+    defaultBoard[2][0] = "OO";
+    defaultBoard[2][1] = "OO";
+    defaultBoard[2][2] = "bB";
+    defaultBoard[2][3] = "bR";
+    defaultBoard[3][0] = "OO";
+    defaultBoard[3][1] = "OO";
+    defaultBoard[3][2] = "bR";
+    defaultBoard[3][3] = "bK";
 
-window.onload = function loadBoard() {
     var chessBoard = document.getElementById("chessBoard");
-    boardstring.once("value", (data) => {
-        var boardstring = data.val();
-        var boardstate = new Array(17);
-        var index = 0;
-        for(var i = 0; i <= 32; i+=2){
-            boardstate[index] = boardstring.substring(i,i+2);
-            index++;
-        }
-        index=0;
-        for(var i=4; i>=1; i--){
-            var row = chessBoard.appendChild(document.createElement("div"));
-            for (var j=0; j<=3; j++){
-                square = document.createElement("span");
-                square.id = generateId(i, j);
-                square.title = generateId(i, j);
-                square.className = boardstate[index];
-                index++;
-                row.appendChild(square);
+    for (var i=3; i>=0; i--){
+        var row = chessBoard.appendChild(document.createElement("div"));
+        for (var j=0; j<=3; j++){
+            square = document.createElement("span");
+            square.id = generateId(i, j);
+            square.title = generateId(i, j);
+            var tempClass = defaultBoard[i][j];
+            square.className = tempClass;
+            if(tempClass==="wR"||tempClass==="bR"||tempClass==="wK"||tempClass==="bK"||tempClass==="wB"||tempClass==="bB"){
+                if(tempClass==="wR"||tempClass==="wK"||tempClass==="wB"){
+                    square.setAttribute("draggable", "true");
+                    square.setAttribute("onDragStart", "dragstart_handler(event)");
+                }
             }
+            square.setAttribute("ondragend", "dragend_handler()");
+            row.appendChild(square);
         }
-    });
-    //TODO: gameInProgress = true;
+    }
+    function generateId (i, j) {
+        var id = "";
+        switch(j) {
+            case 0:
+                return(id = ("a"+(i+1)+""));
+            case 1:
+                return(id = ("b"+(i+1)+""));
+            case 2:
+                return(id = ("c"+(i+1)+""));
+            case 3:
+                return(id = ("d"+(i+1)+""));
+        }
+    }
+	gameInProgress = true;
 }
-
-document.addEventListener('DOMContentLoaded',recieveMoveFromServer);

@@ -20,8 +20,29 @@
 <body>
 <div style="background-image: url('img/lava.png');">
 	<div class="row">
-		<h1 class ="card-title" >The Gamm Coombat</h1>
-		<h2><a href ="lobby.html" class="quit">leave</a></h2>
+		<div class="col-6">
+			<div class="card-group m-6">
+				<div class="card text-center bg-light mb-2">
+					<div id="whiteplayer" class="card-body">
+					</div>
+				</div>
+				<div class="card text-center text-white bg-secondary mb-2">		
+					<div id="moveinfo" class="card-body">
+						Game not started.
+					</div>
+				</div>
+				<div class="card text-center text-white bg-dark mb-2">		
+					<div id="blackplayer" class="card-body">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-5 mx-auto">
+			<h1 class ="card-title" >The Gamm Coombat</h1>
+		</div>
+		<div class="col-1 pr-4">
+			<h2><a href ="lobby.html" class="card-title">leave</a></h2>
+		</div>
 	</div>
 	<div class="row">
 		<div id="chessBoard"></div>
@@ -40,8 +61,8 @@
 				<button id = "msg-btn">Send</button>
 				<!--<button id = "logout-button" OnClick="lobby()">Quit</button>-->
 			  </form>
-			</div>
-		  </div>
+		    </div>
+		</div>
 	</div>
 	<div class="row">
 		<footer class="page-footer mt-4">

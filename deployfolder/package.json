@@ -1,0 +1,10 @@
+{
+  "name" : "ourgame-c7b54",
+  "version" : "1.0.0",
+  "dependencies": {
+
+  },
+  "scripts" : {
+    "serve" : "firebase emulators:start"
+  }
+}

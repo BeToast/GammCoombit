@@ -1,58 +1,74 @@
-
 <html>
-    <head>
-        <meta charset="utf-8">
-        <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'/>
-        <link rel="stylesheet" href="css/server2.css">
-        <link rel="stylesheet" href="css/piece.css">
-        <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
-        <script src="/__/firebase/8.3.3/firebase-auth.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-database.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-storage.js"></script>
-        <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-        <script src = "https://cdnjs.cloudflare.com/ajax/libs/node-uuid/1.4.8/uuid.min.js"></script>
-        <script> document.addEventListener("DOMContentLoaded", function(){
-            checkUser();
-            getSecureApi();
-        });
-        </script>
-    </head>
-    <body>
-    <div style="background-image: url('img/server2bg.png');">
-        <div class="row">
-            <h1 class ="card-title" >The Gamm Coombat</h1>
-            <h2><a href ="lobby.html" class= "quit">leave</a></h2>
-        </div>
-        <div class="row">
-            <div id="chessBoard"></div>
-            <div class = "chat">
-                <div class = "chat-window" id = "chat-window">
-                  <ul id = "messages">
-                    <li class="msg">
-                        <span class = "msg-span"><i class = "name">Server: </i>Welcome to server 2!</span>
-                    </li>
-                    <li class="msg my">
-                        <span class = "msg-span"><i class = "name">Server: </i>Write something, or join a game!</span>
-                    </li>
-                  </ul>
-                  <form id = "messageForm" autocomplete="off">
-                    <input type = "text" id = "msg-input" placeholder="Enter a message">
-                    <button id = "msg-btn">Send</button>
-                    <!--<button id = "logout-button" OnClick="lobby()">Quit</button>-->
-                  </form>
-                </div>
-              </div>
-        </div>
-        <div class="row">
-            <footer class="page-footer mt-4">
-                <div class="footer-copyright text-center py-3">© 2021 Copyright</div>
-            </footer>
-        </div>
-    </div>
-    <script src="js/server2Chat.js"></script>
-    <script src="js/board2.js"></script>
-    <script src="js/boardmenu.js"></script>
-    <script src="js/checkUser.js"></script>
-    <script src="js/getSecureApi.js"></script>
-    </body>
-    </html>
+<head>
+	<meta charset="utf-8">
+	<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'/>
+	<link rel="stylesheet" href="css/server2.css">
+	<link rel="stylesheet" href="css/piece.css">
+	<script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
+    <script src="/__/firebase/8.3.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-storage.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/node-uuid/1.4.8/uuid.min.js"></script>
+	<script> document.addEventListener("DOMContentLoaded", function(){
+		checkUser();
+		getSecureApi();
+	});
+	</script>
+</head>
+<body>
+<div style="background-image: url('img/server2bg.png');">
+	<div class="row">
+		<div class="col-6">
+			<div class="card-group m-6">
+				<div class="card text-center bg-light mb-2">
+					<div id="whiteplayer" class="card-body">Waiting for white player...</div>
+				</div>
+				<div class="card text-center text-white bg-secondary mb-2">
+					<div id="moveinfo" class="card-body">Game not started.</div>
+				</div>
+				<div class="card text-center text-white bg-dark mb-2">
+					<div id="blackplayer" class="card-body">Waiting for black player...</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-5 mx-auto">
+			<h1 class ="card-title" >The Gamm Coombat</h1>
+		</div>
+		<div class="col-1 pr-4">
+			<a onclick="leave()" class="btn btn-secondary" href="lobby.html" role="button">leave</a>
+		</div>
+	</div>
+	<div class="row">
+		<div id="chessBoard"></div>
+		<div class = "chat">
+			<div class = "chat-window" id = "chat-window">
+			  <ul id = "messages">
+				<li class="msg">
+					<span class = "msg-span"><i class = "name">Server: </i>Welcome to server 2!</span>
+				</li>
+				<li class="msg my">
+					<span class = "msg-span"><i class = "name">Server: </i>Write something, or join a game!</span>
+				</li>
+			  </ul>
+			  <form id = "messageForm" autocomplete="off">
+				<input type = "text" id = "msg-input" placeholder="Enter a message">
+				<button id = "msg-btn">Send</button>
+				<!--<button id = "logout-button" OnClick="lobby()">Quit</button>-->
+			  </form>
+		    </div>
+		</div>
+	</div>
+	<div class="row">
+		<footer class="page-footer mt-4">
+			<div class="footer-copyright text-center py-3">Red Sus</div>
+		</footer>
+	</div>
+</div>
+<script defer src="js/checkUser.js"></script>
+<script defer src="js/getSecureApi.js"></script>
+<script defer src="js/server2Chat.js"></script>
+<script defer src="js/boardmenu.js"></script>
+<script defer src="js/board2.js"></script>
+</body>
+</html>

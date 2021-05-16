@@ -11,46 +11,22 @@ const server5white = database.ref("/lobbybase/server5/white");
 const server5black = database.ref("/lobbybase/server5/black");
 const testserver = database.ref("/lobbybase/testserver");
 
-function test2(){
-    testserver.get().then((snapshot) => {
-        if (snapshot.exists()) {
-        console.log(snapshot.val());
-        } else {
-        console.log("No data available");
-        }
-    }).catch((error) => {
-        console.error(error);
-    });
-}
-
-function test(){
-    firebase.database().ref('lobbybase/testserver').set({
-        white: "whiteplayer",
-        black: "blackplayer",
-        board: "OOOObRbKOOOObBbRwRwBOOOOwKwROOOOWW",
-    }); 
-}
-
 function resetlobbybase(){
     for(var i = 1; i < 6; i++){
         firebase.database().ref('lobbybase/server'+i+'').set({
             white: "",
             black: "",
             board: "OOOObRbKOOOObBbRwRwBOOOOwKwROOOOWW",
+            move: "ffff"
         });
     }
-    firebase.database().ref('lobbybase/testserver').set({
-        white: "",
-        black: "",
-        board: "OOOObRbKOOOObBbRwRwBOOOOwKwROOOOWW",
-    }); 
 }
 
 function joingame(server, color){
     if(color === "white" || color === "black"){
         var rat = document.getElementById(color+server).innerHTML;
         if(rat === "Join White" || rat === "Join Black"){
-            firebase.database().ref('lobbybase/server'+server+'/white').set(getUserName());
+            firebase.database().ref('lobbybase/server'+server+'/'+color).set(firebase.auth().currentUser.displayName);
             window.location.href = 'server'+server+'.html';
         }else{
             document.getElementById("lobbyalert").innerHTML = `

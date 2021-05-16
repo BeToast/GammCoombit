@@ -1,4 +1,3 @@
-
 <html>
 <head>
 	<meta charset="utf-8">
@@ -23,17 +22,13 @@
 		<div class="col-6">
 			<div class="card-group m-6">
 				<div class="card text-center bg-light mb-2">
-					<div id="whiteplayer" class="card-body">
-					</div>
+					<div id="whiteplayer" class="card-body">Waiting for white player...</div>
 				</div>
-				<div class="card text-center text-white bg-secondary mb-2">		
-					<div id="moveinfo" class="card-body">
-						Game not started.
-					</div>
+				<div class="card text-center text-white bg-secondary mb-2">
+					<div id="moveinfo" class="card-body">Game not started.</div>
 				</div>
-				<div class="card text-center text-white bg-dark mb-2">		
-					<div id="blackplayer" class="card-body">
-					</div>
+				<div class="card text-center text-white bg-dark mb-2">
+					<div id="blackplayer" class="card-body">Waiting for black player...</div>
 				</div>
 			</div>
 		</div>
@@ -41,7 +36,7 @@
 			<h1 class ="card-title" >The Gamm Coombat</h1>
 		</div>
 		<div class="col-1 pr-4">
-			<h2><a href ="lobby.html" class="card-title">leave</a></h2>
+			<a onclick="leave()" class="btn btn-secondary" href="lobby.html" role="button">leave</a>
 		</div>
 	</div>
 	<div class="row">
@@ -70,10 +65,10 @@
 		</footer>
 	</div>
 </div>
-<script src="js/server1Chat.js"></script>
-<script src="js/board1.js"></script>
-<script src="js/boardmenu.js"></script>
-<script src="js/checkUser.js"></script>
-<script src="js/getSecureApi.js"></script>
+<script defer src="js/checkUser.js"></script>
+<script defer src="js/getSecureApi.js"></script>
+<script defer src="js/server1Chat.js"></script>
+<script defer src="js/boardmenu.js"></script>
+<script defer src="js/board1.js"></script>
 </body>
 </html>

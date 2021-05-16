@@ -20,7 +20,7 @@ function confirmverify()
 		if(user != null){
 			if(user.emailVerified){
 				alert('Email succesfully verified');
-				window.location.href = 'index.html'
+				window.location.replace('index.html');
 			}
 			else{
 				alert('Email has not been verified, try again');
@@ -28,3 +28,5 @@ function confirmverify()
 		}
 	});
 }
+
+window.onload = verifyemail();

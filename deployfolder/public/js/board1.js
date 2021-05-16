@@ -1,7 +1,7 @@
 var yourColor;
 var opponentColor;
-var whiteTurn = true;
-var blackTurn = false;
+var whiteTurn
+var blackTurn
 var checkFrom = "";
 var attackedSquares = [];
 var gameInProgress = false;
@@ -9,78 +9,56 @@ var gameInProgress = false;
 const database = firebase.database();
 const server1white = database.ref("/lobbybase/server1/white");
 const server1black = database.ref("/lobbybase/server1/black");
-const boardstring = database.ref("/lobbybase/server1/board")
-const boardRef = database.ref("/Board1");
-const boardRefLast = database.ref("/Board1").limitToLast(1);
+const boardstring = database.ref("/lobbybase/server1/board");
+const movestring = database.ref("/lobbybase/server1/move");
 
-server1white.on("value", (data) => {
-    var rat = document.getElementById("whiteplayer");
-    if(data.val() === ""){
-        rat.innerHTML = "Waiting for white player...";
-    }else{
-        rat.innerHTML = "@"+data.val();
-    }
-    if(data.val()!=="" && document.getElementById("blackplayer").innerHTML !== "Waiting for black player..."){
-        startGame();
-    }
-});
-server1black.on("value", (data) => {
-    var rat = document.getElementById("blackplayer");
-    if(data.val() === ""){
-        rat.innerHTML = "Waiting for black player...";
-    }else{
-        rat.innerHTML = "@"+data.val();
-    }
-    if(data.val()!=="" && document.getElementById("blackplayer").innerHTML !== "Waiting for white player..."){
-        startGame();
+movestring.on('value', (data) => {
+    var moveString = data.val();
+    console.log(moveString);
+    if(moveString === "ffff"){
+    }else if(((yourColor === "spec")||(yourColor==="white" && blackTurn)||(yourColor==="black" && whiteTurn))&&gameInProgress){
+        var from = moveString.substring(0,2);
+        var to = moveString.substring(2,4);
+        document.getElementById(to).className = document.getElementById(from).className;
+        document.getElementById(from).className = "OO";
+        toggleTurn();
     }
 });
 
 function sendMoveToServer(moveString){
     console.log("movestring: "+moveString+"");
-    //TODO: call firebase function that runs recieveMoveFromServer(moveString) on other players client
+    /*
 	const move = moveString;
 	const newMove = {
 		move: move
 	};
-	boardRef.push(newMove);
+    */
+	movestring.set(moveString);
     sendBoard();
-}
-
-function recieveMoveFromServer(){
-	boardRefLast.on('child_added', (data) => {
-        var moveString = data.val().move;
-        console.log(moveString);
-        if(((yourColor === "spec")||(yourColor==="white" && blackTurn)||(yourColor==="black" && whiteTurn))&&gameInProgress){
-            var from = moveString.substring(0,2);
-            var to = moveString.substring(2,4);
-            document.getElementById(to).className = document.getElementById(from).className;
-            document.getElementById(from).className = "OO";
-            toggleTurn();
-        }
-    });
-}
-
-function startGame(){
-    if(document.getElementById("whiteplayer").innerHTML==="@"+getUserName())
-        yourColor="white";
-    else if(document.getElementById("blackplayer").innerHTML==="@"+getUserName())
-        yourColor="black";
-    allowMove();
 }
 
 function sendBoard(){
     var string = ""
-    for(var j=3; j>=0; j--){
-        for(var i=1; i<=4; i++){
+    for(var i=4; i>=1; i--){
+        for(var j=0; j<=3; j++){
             string+=document.getElementById(generateId(i,j)).className;
         }
     }
     if(whiteTurn)
-        string+='WW';
-    else if(blackTurn)
         string+='BB';
+    else if(blackTurn)
+        string+='WW';
     boardstring.set(string);
+}
+
+function startGame(){
+    gameInProgress = true;
+    if(document.getElementById("whiteplayer").innerHTML===firebase.auth().currentUser.displayName)
+        yourColor="white";
+    else if(document.getElementById("blackplayer").innerHTML===firebase.auth().currentUser.displayName)
+        yourColor="black";
+    updateTurn();
+    allowMove(true);
 }
 
 /*	
@@ -113,26 +91,27 @@ function joinRandom(){
 	startGame();
 }
 */
-
-function forceGameEnd(){
-    if(opponentColor==="white"){
-        sendMoveToServer(""+document.getElementsByClassName("wK")[0].id+"d4");
-    }else if(opponentColor==="black"){
-        sendMoveToServer(""+document.getElementsByClassName("bK")[0].id+"a1");
+function leave(){
+    var username = firebase.auth().currentUser.displayName;
+    if(username===document.getElementById("whiteplayer").innerHTML){
+        server1white.set("");
+    }else if(username===document.getElementById("blackplayer").innerHTML){
+        server1black.set("");
     }
+    window.location.replace("lobby.html");
 }
 
 function gameEnd(winner){
     gameInProgress = false;
     endMenu(winner);
+    boardRef.remove();
+    boardstring.set("OOOObRbKOOOObBbRwRwBOOOOwKwROOOOWW");
+    movestring.set("ffff");
+    server1white.set("");
+    server1black.set("");
     setTimeout(() => {
-        boardRef.remove();
-        boardstring.set("OOOObRbKOOOObBbRwRwBOOOOwKwROOOOWW");
-        server1white.set("");
-        server1black.set("");
-        window.location.href = "lobby.html";
+        window.location.replace("lobby.html");
     },5000);
-	
 }
 
 function toggleTurn(){
@@ -147,10 +126,21 @@ function toggleTurn(){
         gameEnd("white");
     //isCheckMate()
     allowMove(true);
-    if(whiteTurn)  
-        document.getElementById("moveinfo").innerHTML = "White to move.";
-    else if(blackTurn)
-        document.getElementById("moveinfo").innerHTML = "Black to move.";
+    updateTurn();
+}
+
+function updateTurn(){ //updates the display for whos turn it is
+    if(whiteTurn){
+        var rat = document.getElementById("moveinfo");
+        rat.innerHTML = "White to move.";
+        rat.classList.remove("bg-secondary", "bg-dark", "text-white");
+        rat.classList.add("bg-light", "text-dark");
+    }else if(blackTurn){
+        var rat = document.getElementById("moveinfo");
+        rat.innerHTML = "Black to move.";
+        rat.classList.remove("bg-secondary", "bg-light", "text-dark");
+        rat.classList.add("bg-dark", "text-white");
+    }
 }
 
 function getAttackedSquares(){
@@ -199,37 +189,26 @@ function resetDroppable(){
 }
 
 function allowMove(bool){
-    //if your white and white turn
     if(whiteTurn && (yourColor === "white")){
-        var R = chessBoard.getElementsByClassName("wR");
-        for(var index = 0; index < R.length; index++) {
-            R[index].setAttribute("draggable",bool);
-            R[index].setAttribute("onDragStart", "dragstart_handler(event)");
-        }
-        var B = chessBoard.getElementsByClassName("wB");
-        if(B.length !== "0" && B[0] !== undefined){
-            B[0].setAttribute("draggable",bool);
-            B[0].setAttribute("onDragStart", "dragstart_handler(event)");
-        }
-        var K = chessBoard.getElementsByClassName("wK");
-        K[0].setAttribute("draggable",bool);
-        K[0].setAttribute("onDragStart", "dragstart_handler(event)");
-    //if your black and black turn
+        var color = 'w';
     }else if(blackTurn && (yourColor === "black")) {
-        var R = chessBoard.getElementsByClassName("bR");
+        var color = 'b';
+    }
+    if(color!==undefined){
+        var R = chessBoard.getElementsByClassName(color+"R");
         for(var index = 0; index < R.length; index++) {
             R[index].setAttribute("draggable",bool);
             R[index].setAttribute("onDragStart", "dragstart_handler(event)");
         }
-        var B = chessBoard.getElementsByClassName("bB");
+        var B = chessBoard.getElementsByClassName(color+"B");
         if(B.length !== "0" && B[0] !== undefined){
             B[0].setAttribute("draggable",bool);
             B[0].setAttribute("onDragStart", "dragstart_handler(event)");
         }
-        var K = chessBoard.getElementsByClassName("bK");
+        var K = chessBoard.getElementsByClassName(color+"K");
         K[0].setAttribute("draggable",bool);
         K[0].setAttribute("onDragStart", "dragstart_handler(event)");
-    }
+    } 
 }
 
 function isAttacked(square){
@@ -577,30 +556,66 @@ function generateId (i, j) {
     }
 }
 
-window.onload = function loadBoard() {
-    var chessBoard = document.getElementById("chessBoard");
-    boardstring.once("value", (data) => {
-        var boardstring = data.val();
-        var boardstate = new Array(17);
-        var index = 0;
-        for(var i = 0; i <= 32; i+=2){
-            boardstate[index] = boardstring.substring(i,i+2);
+var chessBoard = document.getElementById("chessBoard");
+boardstring.once("value", (data) => {
+    var boardstring = data.val();
+    var boardstate = new Array(17);
+    var index = 0;
+    for(var i = 0; i <= 32; i+=2){
+        boardstate[index] = boardstring.substring(i,i+2);
+        index++;
+    }
+    index=0;
+    for(var i=4; i>=1; i--){
+        var row = chessBoard.appendChild(document.createElement("div"));
+        for (var j=0; j<=3; j++){
+            square = document.createElement("span");
+            square.id = generateId(i, j);
+            square.title = generateId(i, j);
+            square.className = boardstate[index];
             index++;
+            square.setAttribute("ondragend", "dragend_handler()");
+            row.appendChild(square);
         }
-        index=0;
-        for(var i=4; i>=1; i--){
-            var row = chessBoard.appendChild(document.createElement("div"));
-            for (var j=0; j<=3; j++){
-                square = document.createElement("span");
-                square.id = generateId(i, j);
-                square.title = generateId(i, j);
-                square.className = boardstate[index];
-                index++;
-                row.appendChild(square);
-            }
+    }
+    var username = firebase.auth().currentUser.displayName;
+    if(username===document.getElementById("whiteplayer").innerHTML){
+        yourColor="white";
+    }else if(username===document.getElementById("blackplayer").innerHTML){
+        yourColor="black";
+    }
+    if(boardstate[index]==="WW"){
+        whiteTurn = true;
+        blackTurn = false;
+    } else if(boardstate[index]==="BB"){
+        whiteTurn = false;
+        blackTurn = true;
+    }
+});
+function init() {
+    server1white.on("value", (data) => {
+        var rat = document.getElementById("whiteplayer");
+        if(data.val() === ""){
+            rat.innerHTML = "Waiting for white player...";
+        }else{
+            rat.innerHTML = data.val();
+        }
+        var blackinner = document.getElementById("blackplayer").innerHTML
+        if(data.val()!=="" && (blackinner !== "Waiting for black player..." && blackinner !== "")){
+            startGame();
         }
     });
-    //TODO: gameInProgress = true;
+    server1black.on("value", (data) => {
+        var rat = document.getElementById("blackplayer");
+        if(data.val() === ""){
+            rat.innerHTML = "Waiting for black player...";
+        }else{
+            rat.innerHTML = data.val();
+        }
+        if(data.val()!=="" && document.getElementById("blackplayer").innerHTML !== "Waiting for white player..."){
+            startGame();
+        }
+    });
 }
 
-document.addEventListener('DOMContentLoaded',recieveMoveFromServer);
+document.addEventListener('DOMContentLoaded',init);

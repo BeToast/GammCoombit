@@ -7,10 +7,9 @@ function register()
 		var user = firebase.auth().currentUser;
 		user.updateProfile({
         displayName: document.getElementById("nicknameField").value
-    })
+    });
 		window.location.href = "index.html"
-	})
-        .catch((error) => {
+	}).catch((error) => {
             var errorCode = error.code;
             var errorMessage = error.message;
             alert(errorMessage);

@@ -33,7 +33,7 @@
     const {email:userEmail,username, text} = data.val();
     var outputText = text;
     const msg = `<li class="${email == userEmail ? "msg my": "msg"}"><span class = "msg-span">
-      <i class = "username">${username}: </i>${outputText}
+      <i class = "name">${username}: </i>${outputText}
       </span>
     </li>`
     msgScreen.innerHTML += msg;

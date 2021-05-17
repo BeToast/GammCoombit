@@ -21,7 +21,7 @@ function resetlobbybase(){
             board: "OOOObRbKOOOObBbRwRwBOOOOwKwROOOOWW",
             move: "ffff"
         });
-        firebase.database().ref('lobbybase/server'+i+'/spec').remove();
+        firebase.database().ref('lobbybase/server'+i+'spec').remove();
     }
 }
 
@@ -29,9 +29,9 @@ function joingame(server, color){
     var user = firebase.auth().currentUser;
     if(user!==null&&user!==undefined){
         if(color === "white" || color === "black"){
-            var rat = document.getElementById(color+server).innerHTML;
+            var rat = document.getElementById(color+server).innerHTML.trim();
             if(rat === "Join White" || rat === "Join Black"){
-                firebase.database().ref('lobbybase/server'+server+'/'+color).set(firebase.auth().currentUser.displayName);
+                firebase.database().ref('lobbybase/server'+server+'/'+color).set(user.displayName);
                 window.location.href = 'server'+server+'.html';
             }else{
                 document.getElementById("lobbyalert").innerHTML = `
@@ -45,9 +45,14 @@ function joingame(server, color){
                 </div>
                 `;
             }
-        }else if(yourColor==="spec"){
-            firebase.database().ref('lobbybase/server'+i+'/spec').push(user);
-            window.location.href = 'server'+server+'.html';
+        }else if(color==="spec"){
+            /*
+            const newSpec = {
+                spec: user.displayName
+            };
+            firebase.database().ref('lobbybase/server'+server+'spec').push(newSpec);
+            window.location.href = 'server'+server+'.html';  
+        */
         }
     }else{
         checkUser();

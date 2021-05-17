@@ -11,6 +11,7 @@ const server1white = database.ref("/lobbybase/server1/white");
 const server1black = database.ref("/lobbybase/server1/black");
 const boardstring = database.ref("/lobbybase/server1/board");
 const movestring = database.ref("/lobbybase/server1/move");
+const specs = database.ref("lobbybase/server1spec");
 
 movestring.on('value', (data) => {
     var moveString = data.val();
@@ -612,6 +613,18 @@ function init() {
             startGame();
         }
     });
+    /*
+    specs.on("value", (data) => {
+        var username = firebase.auth().currentUser.displayName;
+        Object.values(data).forEach(val => {
+            console.log(val);
+            if(val===username){
+                yourColor==="spec";
+            }
+        });
+        console.log(yourColor);
+    });
+    */
 }
 
 document.addEventListener('DOMContentLoaded',init);

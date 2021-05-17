@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="css/dropdown.css">
 
 	<script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
-    <script src="/__/firebase/8.3.3/firebase-auth.js"></script>
+    <script src="/__/firebase/8.3.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-storage.js"></script>
     <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
@@ -47,7 +47,7 @@
                             <div class="btn-group btn-group col-10">
                                 <button onclick="joingame(1,'white')" class="btn btn-light btn-lg" type="button" id="white1"> Join White </button>
                                 <button onclick="joingame(1,'black')" class="btn btn-dark btn-lg" type="button" id="black1"> Join Black </button>         
-                                <button onclick="joingame(1,null)" class="btn btn-secondary btn-lg" type="button"> Spectate </button>
+                                <button onclick="joingame(1,'spec')" class="btn btn-secondary btn-lg" type="button"> Spectate </button>
                             </div>
                         </div>
                         <br>
@@ -62,7 +62,7 @@
                             <div class="btn-group btn-group col-10">
                                 <button onclick="joingame(2,'white')" class="btn btn-light btn-lg" type="button" id="white2"> Join White </button>
                                 <button onclick="joingame(2,'black')" class="btn btn-dark btn-lg" type="button" id="black2"> Join Black </button>         
-                                <button onclick="joingame(2,null)" class="btn btn-secondary btn-lg" type="button"> Spectate </button>
+                                <button onclick="joingame(2,'spec')" class="btn btn-secondary btn-lg" type="button"> Spectate </button>
                             </div>
                         </div>
                         <br>
@@ -77,7 +77,7 @@
                             <div class="btn-group btn-group col-10">
                                 <button onclick="joingame(3,'white')" class="btn btn-light btn-lg" type="button" id="white3"> Join White </button>
                                 <button onclick="joingame(3,'black')" class="btn btn-dark btn-lg" type="button" id="black3"> Join Black </button>         
-                                <button onclick="joingame(3,null)" class="btn btn-secondary btn-lg" type="button"> Spectate </button>
+                                <button onclick="joingame(3,'spec')" class="btn btn-secondary btn-lg" type="button"> Spectate </button>
                             </div>
                         </div>
                         <br>
@@ -92,7 +92,7 @@
                             <div class="btn-group btn-group col-10">
                                 <button onclick="joingame(4,'white')" class="btn btn-light btn-lg" type="button" id="white4"> Join White </button>
                                 <button onclick="joingame(4,'black')" class="btn btn-dark btn-lg" type="button" id="black4"> Join Black </button>         
-                                <button onclick="joingame(4,null)" class="btn btn-secondary btn-lg" type="button"> Spectate </button>
+                                <button onclick="joingame(4,'spec')" class="btn btn-secondary btn-lg" type="button"> Spectate </button>
                             </div>
                         </div>
                         <br>
@@ -107,7 +107,7 @@
                             <div class="btn-group btn-group col-10">
                                 <button onclick="joingame(5,'white')" class="btn btn-light btn-lg" type="button" id="white5"> Join White </button>
                                 <button onclick="joingame(5,'black')" class="btn btn-dark btn-lg" type="button" id="black5"> Join Black </button>         
-                                <button onclick="joingame(5,null)" class="btn btn-secondary btn-lg" type="button"> Spectate </button>
+                                <button onclick="joingame(5,'spec')" class="btn btn-secondary btn-lg" type="button"> Spectate </button>
                             </div>
                         </div>
                         <br>
@@ -144,12 +144,12 @@
 				</footer>
 			</div>
 	</div>
-<script src="js/superChat.js"></script>
-<script src="js/dropdown.js"></script>
-<script src="js/logout.js"></script>
-<script src="js/checkUser.js"></script>
-<script src="js/lobbyServers.js"></script>
-<script src="js/getSecureApi.js"></script>
+<script defer src="js/checkUser.js"></script>
+<script defer src="js/getSecureApi.js"></script>
+<script defer src="js/lobbyServers.js"></script>
+<script defer src="js/superChat.js"></script>
+<script defer src="js/logout.js"></script>
+<script defer src="js/dropdown.js"></script>
 
 </body>
 

@@ -100,9 +100,9 @@ function gameEnd(winner){
     gameInProgress = false;
     setTimeout(() => {
         endMenu(winner);
+        server1white.set("");
+        server1black.set("");
     },3000);
-    server1white.set("");
-    server1black.set("");
     setTimeout(() => {
         window.location.replace("lobby.html");
     },5000);

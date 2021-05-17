@@ -2,6 +2,10 @@
 //function init() {
 //	msgButton.addEventListener("click", logout);
 //}
+function rules(){
+	window.location.href = "rules.html";
+}
+
 function logout() {
 	firebase.auth().signOut().then(() => {
 			// Sign-out successful.
@@ -11,4 +15,3 @@ function logout() {
 			// An error happened.
 		});
 }
-document.addEventListener('DOMContentLoaded',init);

@@ -2,13 +2,12 @@ function verifyemail()
 {
 	firebase.auth().onAuthStateChanged(function(user) {
 		if(user != null){
-		user.sendEmailVerification().then(function() {
-			// Email sent.
-		}).catch(function(error) {
-			alert(error.message);
-		});
-		}
-		else{
+			user.sendEmailVerification().then(function() {
+				// Email sent.
+			}).catch(function(error) {
+				alert(error.message);
+			});
+		}else{
 			alert('Oops you aren\'t logged in');
 		}
 	});
@@ -20,7 +19,7 @@ function confirmverify()
 		if(user != null){
 			if(user.emailVerified){
 				alert('Email succesfully verified');
-				window.location.replace('index.html');
+				window.location.replace('rules.html');
 			}
 			else{
 				alert('Email has not been verified, try again');
@@ -29,4 +28,4 @@ function confirmverify()
 	});
 }
 
-window.onload = verifyemail();
+document.addEventListener('DOMContentLoaded',verifyemail);

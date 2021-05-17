@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>The Gamm Cumbit</title>
+    <title>The Gamm Coombit</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="css/login.css"/>
-	<script src="js/verifyemail.js"></script>
-	<script src="js/logout.js"></script>
+	<script defer src="/__/firebase/8.3.0/firebase-app.js"></script>
+	<!-- Add Firebase products that you want to use -->
+	<script defer src="/__/firebase/8.3.0/firebase-auth.js"></script>
+	<script defer src="/__/firebase/8.3.0/firebase-firestore.js"></script>
+	<!-- Initialize Firebase -->
+	<script defer src="/__/firebase/init.js"></script>
+	<script defer src="js/logout.js"></script>
+	<script defer src="js/verifyemail.js"></script>
   </head>
   <body>
-    
 <section class="form my-4 mx-5">
 	<div class="container">
 		<div class="row no-gutters">
@@ -44,14 +49,5 @@
 		</div>
 	</div>
 </section>
-		
-<!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
-<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-<script src="/__/firebase/8.3.0/firebase-app.js"></script>
-<!-- Add Firebase products that you want to use -->
-<script src="/__/firebase/8.3.0/firebase-auth.js"></script>
-<script src="/__/firebase/8.3.0/firebase-firestore.js"></script>
-<!-- Initialize Firebase -->
-<script src="/__/firebase/init.js"></script>
 </body>
 </html>

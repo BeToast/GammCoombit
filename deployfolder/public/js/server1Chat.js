@@ -45,9 +45,9 @@
     const text = msgInput.value;
       if(!text.trim()) return;
         const msg = {
-		  email,
-		  username,
-          text: text
+		    email,
+		    username,
+        text: text
       };
       msgRef.push(msg);
       msgInput.value = "";

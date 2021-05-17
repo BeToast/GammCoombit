@@ -10,6 +10,8 @@ const server4black = database.ref("/lobbybase/server4/black");
 const server5white = database.ref("/lobbybase/server5/white");
 const server5black = database.ref("/lobbybase/server5/black");
 const testserver = database.ref("/lobbybase/testserver");
+const defboard = "OOOObRbKOOOObBbRwRwBOOOOwKwROOOOWW";
+const defmove = "ffff";
 
 function resetlobbybase(){
     for(var i = 1; i < 6; i++){
@@ -19,121 +21,181 @@ function resetlobbybase(){
             board: "OOOObRbKOOOObBbRwRwBOOOOwKwROOOOWW",
             move: "ffff"
         });
+        firebase.database().ref('lobbybase/server'+i+'/spec').remove();
     }
 }
 
 function joingame(server, color){
-    if(color === "white" || color === "black"){
-        var rat = document.getElementById(color+server).innerHTML;
-        if(rat === "Join White" || rat === "Join Black"){
-            firebase.database().ref('lobbybase/server'+server+'/'+color).set(firebase.auth().currentUser.displayName);
-            window.location.href = 'server'+server+'.html';
-        }else{
-            document.getElementById("lobbyalert").innerHTML = `
-            <div class="col">
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <strong>Whoops!</strong> There is already a player on that team.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+    var user = firebase.auth().currentUser;
+    if(user!==null&&user!==undefined){
+        if(color === "white" || color === "black"){
+            var rat = document.getElementById(color+server).innerHTML;
+            if(rat === "Join White" || rat === "Join Black"){
+                firebase.database().ref('lobbybase/server'+server+'/'+color).set(firebase.auth().currentUser.displayName);
+                window.location.href = 'server'+server+'.html';
+            }else{
+                document.getElementById("lobbyalert").innerHTML = `
+                <div class="col">
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Whoops!</strong> There is already a player on that team.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
                 </div>
-            </div>
-            `;
+                `;
+            }
+        }else if(yourColor==="spec"){
+            firebase.database().ref('lobbybase/server'+i+'/spec').push(user);
+            window.location.href = 'server'+server+'.html';
         }
-    } else {
-        window.location.href = 'server'+server+'.html';
+    }else{
+        checkUser();
     }
 }
 
 //lobbybase update listeners
-server1white.on("value", (data) => {
+server1white.on("value", (white) => {
     var rat = document.getElementById("white1");
-    if(data.val() === ""){
+    if(white.val() === ""){
         rat.innerHTML = "Join White";
     }else{
-        rat.innerHTML = "@"+data.val();
+        rat.innerHTML = "@"+white.val();
     }
+    server1black.once("value", (black) => {
+        if(white.val()===""&&black.val()===""){
+            database.ref('lobbybase/server1/board').set(defboard);
+            database.ref('lobbybase/server1/move').set(defmove);
+        }
+    });
 });
-server1black.on("value", (data) => {
+server1black.on("value", (black) => {
     var rat = document.getElementById("black1");
-    if(data.val() === ""){
+    if(black.val() === ""){
         rat.innerHTML = "Join Black";
     }else{
-        rat.innerHTML = "@"+data.val();
+        rat.innerHTML = "@"+black.val();
     }
+    server1white.once("value", (white) => {
+        if(white.val()===""&&black.val()===""){
+            database.ref('lobbybase/server1/board').set(defboard);
+            database.ref('lobbybase/server1/move').set(defmove);
+        }
+    });
 });
 
-server2white.on("value", (data) => {
+server2white.on("value", (white) => {
     var rat = document.getElementById("white2");
-    if(data.val() === ""){
+    if(white.val() === ""){
         rat.innerHTML = "Join White";
     }else{
-        rat.innerHTML = "@"+data.val();
+        rat.innerHTML = "@"+white.val();
     }
+    server2black.once("value", (black) => {
+        if(white.val()===""&&black.val()===""){
+            database.ref('lobbybase/server1/board').set(defboard);
+            database.ref('lobbybase/server1/move').set(defmove);
+        }
+    });
 });
-server2black.on("value", (data) => {
+server2black.on("value", (black) => {
     var rat = document.getElementById("black2");
-    if(data.val() === ""){
+    if(black.val() === ""){
         rat.innerHTML = "Join Black";
     }else{
-        rat.innerHTML = "@"+data.val();
-    }        
+        rat.innerHTML = "@"+black.val();
+    }    
+    server2white.once("value", (white) => {
+        if(white.val()===""&&black.val()===""){
+            database.ref('lobbybase/server2/board').set(defboard);
+            database.ref('lobbybase/server2/move').set(defmove);
+        }
+    });    
 });
 
-server3white.on("value", (data) => {
+server3white.on("value", (white) => {
     var rat = document.getElementById("white3");
-    if(data.val() === ""){
+    if(white.val() === ""){
         rat.innerHTML = "Join White";
     }else{
-        rat.innerHTML = "@"+data.val();
-    }    
+        rat.innerHTML = "@"+white.val();
+    }  
+    server3black.once("value", (black) => {
+        if(white.val()===""&&black.val()===""){
+            database.ref('lobbybase/server3/board').set(defboard);
+            database.ref('lobbybase/server3/move').set(defmove);
+        }
+    });  
 });
-server3black.on("value", (data) => {
+server3black.on("value", (black) => {
     var rat = document.getElementById("black3");
-    if(data.val() === ""){
+    if(black.val() === ""){
         rat.innerHTML = "Join Black";
     }else{
-        rat.innerHTML = "@"+data.val();
+        rat.innerHTML = "@"+black.val();
     }    
+    server3white.once("value", (white) => {
+        if(white.val()===""&&black.val()===""){
+            database.ref('lobbybase/server3/board').set(defboard);
+            database.ref('lobbybase/server3/move').set(defmove);
+        }
+    });
 });
 
-server4white.on("value", (data) => {
+server4white.on("value", (white) => {
     var rat = document.getElementById("white4");
-    if(data.val() === ""){
+    if(white.val() === ""){
         rat.innerHTML = "Join White";
     }else{
-        rat.innerHTML = "@"+data.val();
-    }        
+        rat.innerHTML = "@"+white.val();
+    }
+    server4black.once("value", (black) => {
+        if(white.val()===""&&black.val()===""){
+            database.ref('lobbybase/server4/board').set(defboard);
+            database.ref('lobbybase/server4/move').set(defmove);
+        }
+    });        
 });
-server4black.on("value", (data) => {
+server4black.on("value", (black) => {
     var rat = document.getElementById("black4");
-    if(data.val() === ""){
+    if(black.val() === ""){
         rat.innerHTML = "Join Black";
     }else{
-        rat.innerHTML = "@"+data.val();
-    }     
+        rat.innerHTML = "@"+black.val();
+    }
+    server4white.once("value", (white) => {
+        if(white.val()===""&&black.val()===""){
+            database.ref('lobbybase/server4/board').set(defboard);
+            database.ref('lobbybase/server4/move').set(defmove);
+        }
+    });
 });
 
-server5white.on("value", (data) => {
+server5white.on("value", (white) => {
     var rat = document.getElementById("white5");
-    if(data.val() === ""){
+    if(white.val() === ""){
         rat.innerHTML = "Join White";
     }else{
-        rat.innerHTML = "@"+data.val();
-    }       
+        rat.innerHTML = "@"+white.val();
+    }
+    server5black.once("value", (black) => {
+        if(white.val()===""&&black.val()===""){
+            database.ref('lobbybase/server5/board').set(defboard);
+            database.ref('lobbybase/server5/move').set(defmove);
+        }
+    });       
 });
-server5black.on("value", (data) => {
+server5black.on("value", (black) => {
     var rat = document.getElementById("black5");
-    if(data.val() === ""){
+    if(black.val() === ""){
         rat.innerHTML = "Join Black";
     }else{
-        rat.innerHTML = "@"+data.val();
-    }      
+        rat.innerHTML = "@"+black.val();
+    }
+    server5white.once("value", (white) => {
+        if(white.val()===""&&black.val()===""){
+            database.ref('lobbybase/server5/board').set(defboard);
+            database.ref('lobbybase/server5/move').set(defmove);
+        }
+    });      
 });
-/*
-testserver.on('value', (data) => {
-    var white = data.val().white;
-    var black = data.val().black;
-    var board = data.val().board;
-});
-*/

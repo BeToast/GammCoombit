@@ -16,7 +16,7 @@ movestring.on('value', (data) => {
     var moveString = data.val();
     console.log(moveString);
     if(moveString === "ffff"){
-    }else if(((yourColor === "spec")||(yourColor==="white" && blackTurn)||(yourColor==="black" && whiteTurn))&&gameInProgress){
+    }else if(yourColor==="spec"||(((yourColor === "spec")||(yourColor==="white" && blackTurn)||(yourColor==="black" && whiteTurn))&&gameInProgress)){
         var from = moveString.substring(0,2);
         var to = moveString.substring(2,4);
         document.getElementById(to).className = document.getElementById(from).className;
@@ -27,12 +27,6 @@ movestring.on('value', (data) => {
 
 function sendMoveToServer(moveString){
     console.log("movestring: "+moveString+"");
-    /*
-	const move = moveString;
-	const newMove = {
-		move: move
-	};
-    */
 	movestring.set(moveString);
     sendBoard();
 }
@@ -103,10 +97,9 @@ function leave(){
 
 function gameEnd(winner){
     gameInProgress = false;
-    endMenu(winner);
-    boardRef.remove();
-    boardstring.set("OOOObRbKOOOObBbRwRwBOOOOwKwROOOOWW");
-    movestring.set("ffff");
+    setTimeout(() => {
+        endMenu(winner);
+    },3000);
     server1white.set("");
     server1black.set("");
     setTimeout(() => {
@@ -194,7 +187,7 @@ function allowMove(bool){
     }else if(blackTurn && (yourColor === "black")) {
         var color = 'b';
     }
-    if(color!==undefined){
+    if(color!==undefined&&color!=="spec"){
         var R = chessBoard.getElementsByClassName(color+"R");
         for(var index = 0; index < R.length; index++) {
             R[index].setAttribute("draggable",bool);
@@ -595,24 +588,27 @@ boardstring.once("value", (data) => {
 function init() {
     server1white.on("value", (data) => {
         var rat = document.getElementById("whiteplayer");
-        if(data.val() === ""){
+        var whiteplayer = data.val();
+        if(whiteplayer===""){
             rat.innerHTML = "Waiting for white player...";
         }else{
-            rat.innerHTML = data.val();
+            rat.innerHTML = whiteplayer;
         }
         var blackinner = document.getElementById("blackplayer").innerHTML
-        if(data.val()!=="" && (blackinner !== "Waiting for black player..." && blackinner !== "")){
+        if(whiteplayer!=="" && (blackinner !== "Waiting for black player..." && blackinner !== "")){
             startGame();
         }
+
     });
     server1black.on("value", (data) => {
         var rat = document.getElementById("blackplayer");
-        if(data.val() === ""){
+        var blackplayer = data.val();
+        if(blackplayer===""){
             rat.innerHTML = "Waiting for black player...";
         }else{
-            rat.innerHTML = data.val();
+            rat.innerHTML = blackplayer;
         }
-        if(data.val()!=="" && document.getElementById("blackplayer").innerHTML !== "Waiting for white player..."){
+        if(blackplayer!=="" && document.getElementById("whiteplayer").innerHTML !== "Waiting for white player..."){
             startGame();
         }
     });

@@ -23,7 +23,7 @@
 	}
 	
 	.btn1{
-		borer: none;
+		border: none;
 		outline: none;
 		height: 50px;
 		width: 100%;
@@ -34,6 +34,29 @@
 	}
 	
 	.btn1:hover{
+		background: white;
+		border: 1px solid;
+		color: black;
+	}
+
+	.btn2{
+		/*padding: ;*/
+		/*padding-block: 100%;*/
+		padding-top: 13px;
+		padding-bottom: 13px;
+		padding-left:47px;
+		padding-Right:47px;
+		border: none;
+		outline: none;
+		text-decoration: none;
+		background-color: black;
+		color: white;
+		border-radius: 4px;
+		font-weight: bold;
+	}
+
+	.btn2:hover{
+		text-decoration: none;
 		background: white;
 		border: 1px solid;
 		color: black;

@@ -1,50 +1,49 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>The Gamm Cumbit</title>
+    <title>Gamm Cooombit</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="css/login.css"/>
-	<script src="js/passwordreset.js"></script>
-	<script src="js/nicknamereset.js"></script>
+	<script defer src="js/passwordreset.js"></script>
+	<script defer src="js/nicknamereset.js"></script>
   </head>
   <body>
-    
-		<section class="form my-4 mx-5">
-			<div class="container">
-				<div class="row no-gutters">
-					<div class="col-md-5">
-						<img src="img/ted.jpg" class="img-fluid">
-					</div>
-					<div class="col-lg-7 py-5 px-5">
-						<h2 class="font-weight-bold py-3">Gamm Cumbit</h2>
-						<h4>Update your details</h4>
-						<form>
-							<div class="form-row">
-								<div class="col-lg-7">
-									<input type="email" id="emailField" placeholder="Email-Address" class="form-control my-3 p-4">
-								</div>
+	<section class="form my-4 mx-5">
+		<div class="container">
+			<div class="row no-gutters">
+				<div class="col-md-5">
+					<img src="img/ted.jpg" class="img-fluid">
+				</div>
+				<div class="col-lg-7 py-5 px-5">
+					<h2 class="font-weight-bold py-3">Gamm Coombit</h2>
+					<h4>Update your details</h4>
+					<form>
+						<div class="form-row">
+							<div class="col-lg-7">
+								<input type="email" id="emailField" placeholder="Email-Address" class="form-control my-3 p-4">
 							</div>
-							<div class="form-row">
-								<div class="col-lg-7">
-									<button type="button" onclick="passwordReset()" class="btn1">Reset Password</button>
-								</div>
+						</div>
+						<div class="form-row">
+							<div class="col-lg-7">
+								<button type="button" onclick="passwordReset()" class="btn1">Reset Password</button>
 							</div>
-							<div class="form-row">
-								<div class="col-lg-7">
-									<input type="name" id="nicknameField" placeholder="New-nickname" class="form-control my-3 p-4">
-								</div>
+						</div>
+						<div class="form-row">
+							<div class="col-lg-7">
+								<input type="name" id="nicknameField" placeholder="New-nickname" class="form-control my-3 p-4">
 							</div>
-							<div class="form-row">
-								<div class="col-lg-7">
-									<button type="button" onclick="nicknameReset()" class="btn1">Change nickname</button>
-								</div>
+						</div>
+						<div class="form-row">
+							<div class="col-lg-7">
+								<button type="button" onclick="nicknameReset()" class="btn1">Change nickname</button>
 							</div>
-							<p>Return to <a href="lobby.html">Lobby</a></p>
-						</form>
-					</div>
+						</div>
+						<p>Return to <a href="lobby.html">Lobby</a></p>
+					</form>
 				</div>
 			</div>
-		</section>
+		</div>
+	</section>
 		
 <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->

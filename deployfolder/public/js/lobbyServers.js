@@ -45,14 +45,9 @@ function joingame(server, color){
                 </div>
                 `;
             }
-        }else if(color==="spec"){
-            /*
-            const newSpec = {
-                spec: user.displayName
-            };
-            firebase.database().ref('lobbybase/server'+server+'spec').push(newSpec);
-            window.location.href = 'server'+server+'.html';  
-        */
+        } else if (color === "spec"){
+            //add code to show spectators to players.
+            window.location.href = 'server'+server+'.html';
         }
     }else{
         checkUser();

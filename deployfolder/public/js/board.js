@@ -6,24 +6,13 @@ var checkFrom = "";
 var attackedSquares = [];
 var gameInProgress = false;
 
+//var fileName = location.pathname.split("/").slice(-1);
+var serverNum = location.pathname.substring(location.pathname.lastIndexOf("/") + 1).charAt(6);
 const database = firebase.database();
-const server1white = database.ref("/lobbybase/server2/white");
-const server1black = database.ref("/lobbybase/server2/black");
-const boardstring = database.ref("/lobbybase/server2/board");
-const movestring = database.ref("/lobbybase/server2/move");
-
-movestring.on('value', (data) => {
-    var moveString = data.val();
-    console.log(moveString);
-    if(moveString === "ffff"){
-    }else if(yourColor==="spec"||(((yourColor === "spec")||(yourColor==="white" && blackTurn)||(yourColor==="black" && whiteTurn))&&gameInProgress)){
-        var from = moveString.substring(0,2);
-        var to = moveString.substring(2,4);
-        document.getElementById(to).className = document.getElementById(from).className;
-        document.getElementById(from).className = "OO";
-        toggleTurn();
-    }
-});
+const serverwhite = database.ref("/lobbybase/server"+serverNum+"/white");
+const serverblack = database.ref("/lobbybase/server"+serverNum+"/black");
+const boardstring = database.ref("/lobbybase/server"+serverNum+"/board");
+const movestring = database.ref("/lobbybase/server"+serverNum+"/move");
 
 function sendMoveToServer(moveString){
     console.log("movestring: "+moveString+"");
@@ -88,9 +77,9 @@ function joinRandom(){
 function leave(){
     var username = firebase.auth().currentUser.displayName;
     if(username===document.getElementById("whiteplayer").innerHTML){
-        server1white.set("");
+        serverwhite.set("");
     }else if(username===document.getElementById("blackplayer").innerHTML){
-        server1black.set("");
+        serverblack.set("");
     }
     window.location.replace("lobby.html");
 }
@@ -99,8 +88,8 @@ function gameEnd(winner){
     gameInProgress = false;
     setTimeout(() => {
         endMenu(winner);
-        server1white.set("");
-        server1black.set("");
+        serverwhite.set("");
+        serverblack.set("");
     },3000);
     setTimeout(() => {
         window.location.replace("lobby.html");
@@ -586,7 +575,7 @@ boardstring.once("value", (data) => {
     }
 });
 function init() {
-    server1white.on("value", (data) => {
+    serverwhite.on("value", (data) => {
         var rat = document.getElementById("whiteplayer");
         var whiteplayer = data.val();
         if(whiteplayer===""){
@@ -600,7 +589,7 @@ function init() {
         }
 
     });
-    server1black.on("value", (data) => {
+    serverblack.on("value", (data) => {
         var rat = document.getElementById("blackplayer");
         var blackplayer = data.val();
         if(blackplayer===""){
@@ -612,6 +601,21 @@ function init() {
             startGame();
         }
     });
+    movestring.on('value', (data) => {
+        var moveString = data.val();
+        console.log(moveString);
+        if(moveString === "ffff"){
+        }else if(yourColor==="spec"||(((yourColor==="white" && blackTurn)||(yourColor==="black" && whiteTurn))&&gameInProgress)){
+            var from = moveString.substring(0,2);
+            var to = moveString.substring(2,4);
+            if(from !== "OO"){
+                document.getElementById(to).className = document.getElementById(from).className;
+                document.getElementById(from).className = "OO";
+                toggleTurn();
+            }
+        }
+    });
+    yourColor = "spec";
 }
 
 document.addEventListener('DOMContentLoaded',init);

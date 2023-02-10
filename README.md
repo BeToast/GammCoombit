@@ -1,7 +1,7 @@
 # GammCoombit
 4x4 Chess-like strategy
 
-Group Project using Vanilla Javascript with Bootstrap to make a realtime online game.
+Group Project using Javascript, Bootstrap and Google Firebase to make a realtime online game.
 
 ##### win conditions
  - checkmate the enemy king.
